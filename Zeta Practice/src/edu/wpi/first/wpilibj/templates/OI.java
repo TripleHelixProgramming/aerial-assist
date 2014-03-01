@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
  */
 public class OI {
     //Joysticks
-    private boolean practice = false;
+    private boolean practice = true;
     private Joystick gamepad = new Joystick(1);
     private Joystick operatorControl = new Joystick(2);
     
@@ -102,36 +102,23 @@ public class OI {
     }
     
     public double getThrottle(){
-        // Xbox Controller
-        if(practice){
-            if(gamepad.getZ() < 0){
-                return -gamepad.getX();
-            }
-            return gamepad.getX();
+        
+        if (gamepad.getRawAxis(4) > 0){
+//            return -gamepad.getX(); // Xbox Controller
+            return -gamepad.getRawAxis(2); // Ps4 Controller
+        }else{
+            return gamepad.getRawAxis(2); // Ps4 Controller
+//            return gamepad.getX(); // Xbox Controller
         }
-        // Ps4 Controller
-        if(gamepad.getRawAxis(4) > 0){
-            return -gamepad.getRawAxis(2);
-        }
-        return gamepad.getRawAxis(2);
     }
     public double getTurn(){
-        if(practice){
-            // Xbox Controller
-            if(gamepad.getZ() > 0){
-               return gamepad.getRawAxis(4) * RobotMap.turnScaling;
-            }
-            return gamepad.getRawAxis(4) * -RobotMap.turnScaling;
-        }
-        
-        // Ps4 Controller
         if (gamepad.getRawAxis(5) > 0){
-            return gamepad.getRawAxis(3) * RobotMap.turnScaling;
+//            return gamepad.getRawAxis(4) * -RobotMap.turnScaling; // Xbox Controller
+            return gamepad.getRawAxis(3) * RobotMap.turnScaling; // Ps4 Controller
         }
-        return gamepad.getRawAxis(3) * RobotMap.turnScaling;
+//        return gamepad.getRawAxis(4) * RobotMap.turnScaling; // Xbox Controller
+        return gamepad.getRawAxis(3) * RobotMap.turnScaling; // Ps4 COntroller
     }
-    
-    // Methods
     public boolean isRollerOn(){
         return rollerPowerButton.get();
     }

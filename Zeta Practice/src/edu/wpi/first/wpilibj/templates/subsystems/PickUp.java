@@ -36,8 +36,6 @@ public class PickUp extends Subsystem {
     
     public void setRollerSpeed(double power){
         powerLevel = power;
-        pickUpAverager.addValue(powerLevel);
-        upperPickUp.set(pickUpAverager.getAverage());
     }
     
     public void deployArm(boolean deploy){
@@ -45,4 +43,8 @@ public class PickUp extends Subsystem {
        solenoid2.set(deploy);
     }
     
+    public void runRoller(){
+        pickUpAverager.addValue(powerLevel);
+        upperPickUp.set(pickUpAverager.getAverage());
+    }
 }

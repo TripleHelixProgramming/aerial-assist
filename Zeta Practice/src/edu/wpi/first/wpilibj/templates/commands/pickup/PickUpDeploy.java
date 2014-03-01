@@ -27,9 +27,11 @@ public class PickUpDeploy extends CommandBase {
         pickUp.deployArm(deploy);
         if(oi.isRollerOn()){
             pickUp.setRollerSpeed(rollerSpeed);
+            pickUp.runRoller();
             System.out.println("Roller On");
         }else{
             pickUp.setRollerSpeed(0);
+            pickUp.runRoller();
             System.out.println("Roller Off");
         }
     }
