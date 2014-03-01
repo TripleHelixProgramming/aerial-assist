@@ -9,7 +9,7 @@
     <type>org.netbeans.modules.ant.freeform</type>
     <configuration>
         <general-data xmlns="http://www.netbeans.org/ns/freeform-project/1">
-            <name>Zeta Practice 3.1.14</name>
+            <name>Zeta Practice3.1.14</name>
             <properties>
                 <property-file>${user.home}/.sunspotfrc.properties</property-file>
                 <property-file>build.properties</property-file>
