@@ -38,7 +38,7 @@ public class PickUpDeploy extends CommandBase {
     }
 
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     protected void end() {
