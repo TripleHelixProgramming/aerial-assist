@@ -24,14 +24,14 @@ public class TwoBallHotGoalAutonomous extends SelectableCommand {
     public TwoBallHotGoalAutonomous() {
        HotGoalProcessing hotGoal = new HotGoalProcessing();
        addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
-       addSequential(new PickUpDeploy(PickUp.DEPLOY, 0.3));
+       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0.3));
        addSequential(new WaitCommand(0.5));
        addSequential(new DriveStraightCommand(0.55, 1500));
-       addSequential(new PickUpDeploy(PickUp.DEPLOY, 0));
+       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0));
        addSequential(hotGoal, 1);
        addSequential(new TurnCommand(hotGoal, 0.55, 250));
        addSequential(new ShootSeries());
-       addSequential(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed));
+       addParallel(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed));
        addSequential(new TurnCommand(hotGoal, -0.55, -500));
        addSequential(new ShootSeries());
     }
