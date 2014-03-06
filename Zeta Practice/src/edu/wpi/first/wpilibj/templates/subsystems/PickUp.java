@@ -28,7 +28,7 @@ public class PickUp extends Subsystem {
     
     private double powerLevel;
     
-    private RollingAverager pickUpAverager = new RollingAverager(20, 0);
+    private RollingAverager pickUpAverager = new RollingAverager(10, 0);
     
     public void initDefaultCommand() {
         setDefaultCommand(new PickUpDeploy(PickUp.RETRACT, 0));
@@ -44,5 +44,7 @@ public class PickUp extends Subsystem {
        solenoid1.set(!deploy);
        solenoid2.set(deploy);
     }
-    
+    public void fireCatch(boolean deploy){
+        
+    }
 }

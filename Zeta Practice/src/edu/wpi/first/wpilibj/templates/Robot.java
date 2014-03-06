@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
+import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallHotGoalAutonomous;
+import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,7 +36,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void autonomousInit() {
-        
+//        autonomousCommand = new TwoBallHotGoalAutonomous();
         autonomousCommand = CommandBase.oi.getSelectedAutoCommand();
         autonomousCommand.start();
     }
@@ -54,6 +56,7 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) {
             autonomousCommand.cancel();
         }
+        CommandBase.drivetrain.shift(Drivetrain.HIGH_GEAR);
     }
 
     /**

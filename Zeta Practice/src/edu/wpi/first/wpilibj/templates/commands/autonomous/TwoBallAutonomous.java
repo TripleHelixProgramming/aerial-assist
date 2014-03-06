@@ -21,12 +21,14 @@ import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
 public class TwoBallAutonomous extends SelectableCommand {
     public TwoBallAutonomous() {
        addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
-       addSequential(new DriveStraightCommand(0.85, 1500));
+       addSequential(new DriveStraightCommand(0.85, 2000));
        addSequential(new ShootSeries());
        addParallel(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed));
-       addSequential(new DriveStraightCommand(-0.85, -1750));
+       addSequential(new DriveStraightCommand(-0.85, -2250));
        addSequential(new WaitCommand(1.5));
-       addSequential(new DriveStraightCommand(0.85, 1500));
+       addSequential(new DriveStraightCommand(0.85, 2000));
+       addParallel(new PickUpDeploy(PickUp.RETRACT, 0));
+       addSequential(new WaitCommand(1));
        addParallel(new PickUpDeploy(PickUp.DEPLOY, 0));
        addSequential(new WaitCommand(1));
        addSequential(new ShootSeries());

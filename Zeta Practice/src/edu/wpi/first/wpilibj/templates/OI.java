@@ -91,7 +91,7 @@ public class OI {
         lowGoalShotButton.whenPressed(new LowGoalShot());
         
         catchButton = new JoystickButton(operatorControl, RobotMap.catchButton);
-        catchButton.whileHeld(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed));
+        catchButton.whileHeld(new PickUpDeploy(PickUp.DEPLOY, 0));
         
         //Joystick Buttons: Gamepad
         shiftUpButton = new JoystickButton(gamepad, RobotMap.shiftUpButton);

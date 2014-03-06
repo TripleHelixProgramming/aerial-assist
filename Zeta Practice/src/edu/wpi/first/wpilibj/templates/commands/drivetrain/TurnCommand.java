@@ -26,8 +26,8 @@ public class TurnCommand extends CommandBase {
     }
 
     protected void initialize() {
-        drivetrain.rightEncoder.reset();
-        drivetrain.rightEncoder.start();
+        CommandBase.drivetrain.rightEncoder.reset();
+        CommandBase.drivetrain.leftEncoder.reset();
         System.out.println("Direction" + direction.getHotGoal());
     }
 
@@ -42,7 +42,7 @@ public class TurnCommand extends CommandBase {
     }
 
     protected boolean isFinished() {
-        if(Math.abs(drivetrain.rightEncoder.getDistance()) >= Math.abs(distance)) {
+        if(Math.abs(drivetrain.rightEncoder.getDistance()) >= Math.abs(distance) || Math.abs(drivetrain.leftEncoder.getDistance()) >= Math.abs(distance)) {
             System.out.println("Finished turning");
             return true;
         }else{
