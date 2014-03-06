@@ -23,16 +23,16 @@ public class FasterTwoBallAutonomous extends SelectableCommand {
     public FasterTwoBallAutonomous() {
        
        addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
-       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0.25));
+       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0.25, PickUp.CLOSE));
        addSequential(new WaitCommand(0.7));
        addSequential(new DriveStraightCommand(0.85, 4500));
        addSequential(new WaitCommand(0.15));
-       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0));
+       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0, PickUp.CLOSE));
        addSequential(new ShootSeries());
-       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0));
+       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0, PickUp.CLOSE));
        addSequential(new WaitCommand(1));
        addSequential(new WaitCommand(0));
-       addParallel(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed));
+       addParallel(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed, PickUp.CLOSE));
        addSequential(new WaitCommand(3));
        addSequential(new ShootSeries());  
     }

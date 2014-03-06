@@ -20,9 +20,13 @@ public class PickUp extends Subsystem {
     
     public static final boolean DEPLOY = true;
     public static final boolean RETRACT = false;
+    public static final boolean OPEN = true;
+    public static final boolean CLOSE = false;
     
-    private Solenoid solenoid1 = new Solenoid(1, RobotMap.pickUpSolenoid1);
-    private Solenoid solenoid2 = new Solenoid(1, RobotMap.pickUpSolenoid2);
+    private Solenoid shooterSolenoid1 = new Solenoid(1, RobotMap.pickUpSolenoid1);
+    private Solenoid shooterSolenoid2 = new Solenoid(1, RobotMap.pickUpSolenoid2);
+    
+    private Solenoid wingSolenoid = new Solenoid(1, RobotMap.wingSolenoidChannel);
     
     private SpeedController upperPickUp = new Talon(RobotMap.upperPickUpRoller);
     
@@ -31,7 +35,7 @@ public class PickUp extends Subsystem {
     private RollingAverager pickUpAverager = new RollingAverager(10, 0);
     
     public void initDefaultCommand() {
-        setDefaultCommand(new PickUpDeploy(PickUp.RETRACT, 0));
+        setDefaultCommand(new PickUpDeploy(RETRACT, 0, CLOSE));
     }
     
     public void setRollerSpeed(double power){
@@ -41,10 +45,10 @@ public class PickUp extends Subsystem {
     }
     
     public void deployArm(boolean deploy){
-       solenoid1.set(!deploy);
-       solenoid2.set(deploy);
+       shooterSolenoid1.set(!deploy);
+       shooterSolenoid2.set(deploy);
     }
     public void fireCatch(boolean deploy){
-        
+        wingSolenoid.set(deploy);
     }
 }

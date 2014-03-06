@@ -45,6 +45,7 @@ public class RobotMap {
     public static int shiftSolenoid2Channel = 2 ;
     public static int pickUpSolenoid1 = 3;
     public static int pickUpSolenoid2 = 4;
+    public static int wingSolenoidChannel = 7;
     
     //Digital IO Ports
     public static int leftEncoderChannelA = 2;

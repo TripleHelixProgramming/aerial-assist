@@ -23,13 +23,13 @@ public class TwoBallAutonomous extends SelectableCommand {
        addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
        addSequential(new DriveStraightCommand(0.85, 2000));
        addSequential(new ShootSeries());
-       addParallel(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed));
+       addParallel(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed, PickUp.CLOSE));
        addSequential(new DriveStraightCommand(-0.85, -2250));
        addSequential(new WaitCommand(1.5));
        addSequential(new DriveStraightCommand(0.85, 2000));
-       addParallel(new PickUpDeploy(PickUp.RETRACT, 0));
+       addParallel(new PickUpDeploy(PickUp.RETRACT, 0, PickUp.CLOSE));
        addSequential(new WaitCommand(1));
-       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0));
+       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0, PickUp.CLOSE));
        addSequential(new WaitCommand(1));
        addSequential(new ShootSeries());
     }

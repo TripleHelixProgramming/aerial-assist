@@ -16,15 +16,18 @@ public class PickUpDeploy extends CommandBase {
     
     private boolean deploy;
     private double rollerSpeed;
+    private boolean openWings;
     
-    public PickUpDeploy(boolean deploy, double rollerSpeed) {
+    public PickUpDeploy(boolean deploy, double rollerSpeed, boolean openWings) {
         requires(pickUp);
         this.deploy = deploy;
         this.rollerSpeed = rollerSpeed;
+        this.openWings = openWings;
     }
 
     protected void initialize() {
         pickUp.deployArm(deploy);
+        pickUp.fireCatch(openWings);
     }
 
     protected void execute() {
