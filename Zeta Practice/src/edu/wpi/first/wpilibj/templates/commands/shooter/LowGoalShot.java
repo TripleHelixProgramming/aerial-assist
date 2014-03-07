@@ -12,33 +12,42 @@ import edu.wpi.first.wpilibj.templates.subsystems.Shooter;
  * @author robotics
  */
 public class LowGoalShot extends CommandBase {
-        private int iterations;
+        private int count;
+        private int upCount;
+        private int downCount;
         private int ITERATIONS;
-    public LowGoalShot() {
+        private int iterationsCount;
+        
+    public LowGoalShot(int upCount, int downCount, int iterations) {
         requires(shooter);
+        this.upCount = upCount;
+        this.downCount = downCount;
+        this.ITERATIONS = iterations;
+        
     }
 
     protected void initialize() {
-        iterations = 0;
+        count = 0;
+        iterationsCount = 0;
     }
 
     protected void execute() {
-        iterations++;
-        ITERATIONS++;
-        if(iterations < 14){
+        if(count < upCount){
             shooter.primeShooter(Shooter.FIRE);
-        }else if(iterations < 15){
+        }else if(count < upCount + downCount){
             shooter.primeShooter(Shooter.PRIME);
         }else{
-            iterations = 0;
+            count = 0;
+            iterationsCount++;
         }
+        count++;
     }
 
     protected boolean isFinished() {
-        if(ITERATIONS >= 15){
-            return true;
+        if(iterationsCount < ITERATIONS){
+            return false;
         }
-        return false;
+        return true;
     }
 
     protected void end() {

@@ -11,8 +11,10 @@ import edu.wpi.first.wpilibj.templates.commands.autonomous.RightHotGoalShootComm
 import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomous;
 import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallHotGoalAutonomous;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.ShiftCommand;
+import edu.wpi.first.wpilibj.templates.commands.pickup.PassCommand;
 import edu.wpi.first.wpilibj.templates.commands.pickup.PickUpDeploy;
 import edu.wpi.first.wpilibj.templates.commands.pickup.RollerPowerDashboardSet;
+import edu.wpi.first.wpilibj.templates.commands.shooter.LowGoalShootSeries;
 import edu.wpi.first.wpilibj.templates.commands.shooter.LowGoalShot;
 import edu.wpi.first.wpilibj.templates.commands.shooter.ShootSeries;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
@@ -33,7 +35,7 @@ public class OI {
     
     //Joystick Buttons: Operator Control
     private JoystickButton pickUpDeployButton;
-    private JoystickButton releaseBallButton;
+    private JoystickButton passButton;
     private JoystickButton rollerPowerButton;
     private JoystickButton shootButton;
     private JoystickButton lowGoalShotButton;
@@ -78,20 +80,20 @@ public class OI {
         new RollerPowerDashboardSet().start();
         
         pickUpDeployButton = new JoystickButton(operatorControl, RobotMap.pickUpDeployButton);
-        pickUpDeployButton.whileHeld(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed));
+        pickUpDeployButton.whileHeld(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed, PickUp.CLOSE));
         
-        releaseBallButton = new JoystickButton (operatorControl, RobotMap.releaseBallButton);
-        releaseBallButton.whileHeld(new PickUpDeploy (PickUp.RETRACT, -RobotMap.passRollerSpeed));
-        //releaseBallButton.whileHeld(new PickUpDeploy (PickUp.RETRACT, -1));
+        passButton = new JoystickButton (operatorControl, RobotMap.releaseBallButton);
+        passButton.whenPressed(new PassCommand());
+        //passButton.whileHeld(new PickUpDeploy (PickUp.RETRACT, -1));
         
         shootButton = new JoystickButton(operatorControl, RobotMap.shootButton);
         shootButton.whenPressed(new ShootSeries());
         
         lowGoalShotButton = new JoystickButton(operatorControl, RobotMap.lowGoalShotButton);
-        lowGoalShotButton.whenPressed(new LowGoalShot());
+        lowGoalShotButton.whenPressed(new LowGoalShootSeries());
         
         catchButton = new JoystickButton(operatorControl, RobotMap.catchButton);
-        catchButton.whileHeld(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed));
+        catchButton.whileHeld(new PickUpDeploy(PickUp.DEPLOY, 0, PickUp.OPEN));
         
         //Joystick Buttons: Gamepad
         shiftUpButton = new JoystickButton(gamepad, RobotMap.shiftUpButton);
