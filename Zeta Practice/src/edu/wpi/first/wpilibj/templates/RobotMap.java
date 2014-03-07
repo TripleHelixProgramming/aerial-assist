@@ -11,7 +11,7 @@ public class RobotMap {
     //Constants
     public static double intakeRollerSpeed = 0.75;
     public static double turnScaling = 0.72;
-    public static double passRollerSpeed = .35;
+    public static double passRollerSpeed = -.75;
     
     //Joystick Buttons: Operator Control
     public static int shootButton = 1;

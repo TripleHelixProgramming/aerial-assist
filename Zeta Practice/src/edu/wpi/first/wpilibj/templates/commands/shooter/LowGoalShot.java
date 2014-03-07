@@ -28,11 +28,10 @@ public class LowGoalShot extends CommandBase {
 
     protected void initialize() {
         count = 0;
+        iterationsCount = 0;
     }
 
     protected void execute() {
-        count++;
-        
         if(count < upCount){
             shooter.primeShooter(Shooter.FIRE);
         }else if(count < upCount + downCount){
@@ -41,13 +40,14 @@ public class LowGoalShot extends CommandBase {
             count = 0;
             iterationsCount++;
         }
+        count++;
     }
 
     protected boolean isFinished() {
-        if(iterationsCount > ITERATIONS){
-            return true;
+        if(iterationsCount < ITERATIONS){
+            return false;
         }
-        return false;
+        return true;
     }
 
     protected void end() {

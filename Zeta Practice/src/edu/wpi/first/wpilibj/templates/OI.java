@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.templates.commands.autonomous.RightHotGoalShootComm
 import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomous;
 import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallHotGoalAutonomous;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.ShiftCommand;
+import edu.wpi.first.wpilibj.templates.commands.pickup.PassCommand;
 import edu.wpi.first.wpilibj.templates.commands.pickup.PickUpDeploy;
 import edu.wpi.first.wpilibj.templates.commands.pickup.RollerPowerDashboardSet;
 import edu.wpi.first.wpilibj.templates.commands.shooter.LowGoalShootSeries;
@@ -82,7 +83,7 @@ public class OI {
         pickUpDeployButton.whileHeld(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed, PickUp.CLOSE));
         
         passButton = new JoystickButton (operatorControl, RobotMap.releaseBallButton);
-        passButton.whenPressed(new PickUpDeploy (PickUp.RETRACT, -RobotMap.passRollerSpeed, PickUp.CLOSE));
+        passButton.whenPressed(new PassCommand());
         //passButton.whileHeld(new PickUpDeploy (PickUp.RETRACT, -1));
         
         shootButton = new JoystickButton(operatorControl, RobotMap.shootButton);
