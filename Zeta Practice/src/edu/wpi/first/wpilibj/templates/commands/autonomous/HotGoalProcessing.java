@@ -33,7 +33,7 @@ public class HotGoalProcessing extends CommandBase implements ProvidesHotGoal{
     public static final String RIGHT = "right";
     public static final String NONE = "none";
     CriteriaCollection cc;
-    private String currentGoal = HotGoalFinder.LEFT;
+    private String currentGoal = HotGoalFinder.NONE;
     HotGoalFinder finder = new HotGoalFinder();
     
     public HotGoalProcessing() {
@@ -45,14 +45,15 @@ public class HotGoalProcessing extends CommandBase implements ProvidesHotGoal{
     }
 
     protected void execute() {
-     // currentGoal = finder.findHotGoal();
+        currentGoal = finder.findHotGoal();
     }
 
     protected boolean isFinished() {
-//        if (!currentGoal.equals(HotGoalFinder.NONE)) {
+        if (!currentGoal.equals(HotGoalFinder.NONE)) {
+            System.out.println("Hot goal found!");
             return true;
-//        }
-//        return false;
+        }
+        return false;
     }
 
     protected void end() {

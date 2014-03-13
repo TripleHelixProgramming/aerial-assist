@@ -56,7 +56,7 @@ public class OI {
     private AutonomousSelector autoSelector;
     
     public OI(){
-        //camera = AxisCamera.getInstance();
+        camera = AxisCamera.getInstance();
         
         //Autonomous Selector
         autoSelectorButton1 = new JoystickButton(operatorControl, RobotMap.autoSelectorButton1);
