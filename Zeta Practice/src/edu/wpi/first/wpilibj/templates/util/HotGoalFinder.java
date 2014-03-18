@@ -48,10 +48,9 @@ public class HotGoalFinder {
                  */
                 ColorImage image;     // comment if using stored images
                 image = OI.camera.getImage();
-//                image.write("autonomous_images/Image" + new Date().getTime() + ".png");
                 //ColorImage image;                           // next 2 lines read image from flash on cRIO
                 //.image = new RGBImage("/testImage.jpg");		// get the sample image from the cRIO flash
-                BinaryImage thresholdImage = image.thresholdRGB(0, 100, 100, 255, 0, 100);
+                BinaryImage thresholdImage = image.thresholdRGB(0, 100, 100, 255, 100, 255);
                 thresholdImage.write("autonomous_images/ThresholdImage" + new Date().getTime() + ".png");
                 //.thresholdHSV(105, 137, 230, 255, 133, 183);   // keep only green objects
                 //thresholdImage.write("/threshold.bmp");

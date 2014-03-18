@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.templates.commands.autonomous.FasterTwoBallAutonomo
 import edu.wpi.first.wpilibj.templates.commands.autonomous.LeftHotGoalShootCommand;
 import edu.wpi.first.wpilibj.templates.commands.autonomous.RightHotGoalShootCommand;
 import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomous;
-import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallHotGoalAutonomous;
+import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallHotGoaTurnAutonomous;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.ShiftCommand;
 import edu.wpi.first.wpilibj.templates.commands.pickup.PassCommand;
 import edu.wpi.first.wpilibj.templates.commands.pickup.PickUpDeploy;
@@ -56,8 +56,8 @@ public class OI {
     private AutonomousSelector autoSelector;
     
     public OI(){
-        camera = AxisCamera.getInstance();
         
+        camera = AxisCamera.getInstance();     
         //Autonomous Selector
         autoSelectorButton1 = new JoystickButton(operatorControl, RobotMap.autoSelectorButton1);
         autoSelectorButton2 = new JoystickButton(operatorControl, RobotMap.autoSelectorButton2);
@@ -66,13 +66,13 @@ public class OI {
         List autonomousCommandsList = new List();
         
         //Autonomous Selector Command
-        autonomousCommandsList.add(new NoneCommand());// 1
-        autonomousCommandsList.add(new LeftHotGoalShootCommand());// 2
-        autonomousCommandsList.add(new RightHotGoalShootCommand());// 3
-        autonomousCommandsList.add(new TwoBallAutonomous());// 4
-        autonomousCommandsList.add(new FasterTwoBallAutonomous());// 5
-        autonomousCommandsList.add(new TwoBallHotGoalAutonomous());// 6
-        autonomousCommandsList.add(new NoneCommand());// 7
+        autonomousCommandsList.add(new NoneCommand());// 0
+        autonomousCommandsList.add(new LeftHotGoalShootCommand());// 1
+        autonomousCommandsList.add(new RightHotGoalShootCommand());// 2
+        autonomousCommandsList.add(new TwoBallAutonomous());// 3
+        autonomousCommandsList.add(new FasterTwoBallAutonomous());// 4
+        autonomousCommandsList.add(new TwoBallHotGoaTurnAutonomous());// 5
+        autonomousCommandsList.add(new NoneCommand());// 6
         autoSelector.setCommands(autonomousCommandsList);
         
         //Joystick Buttons: Operator Control
@@ -84,7 +84,6 @@ public class OI {
         
         passButton = new JoystickButton (operatorControl, RobotMap.releaseBallButton);
         passButton.whenPressed(new PassCommand());
-        //passButton.whileHeld(new PickUpDeploy (PickUp.RETRACT, -1));
         
         shootButton = new JoystickButton(operatorControl, RobotMap.shootButton);
         shootButton.whenPressed(new ShootSeries());

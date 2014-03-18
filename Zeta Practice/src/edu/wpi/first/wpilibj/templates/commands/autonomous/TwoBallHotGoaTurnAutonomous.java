@@ -20,9 +20,9 @@ import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
  *
  * @author robotics
  */
-public class TwoBallHotGoalAutonomous extends SelectableCommand {
+public class TwoBallHotGoaTurnAutonomous extends SelectableCommand {
     
-    public TwoBallHotGoalAutonomous() {
+    public TwoBallHotGoaTurnAutonomous() {
        addParallel(new TurnLightsOnCommand());
        HotGoalProcessing hotGoal = new HotGoalProcessing();
        addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));

@@ -23,18 +23,18 @@ public class FasterTwoBallAutonomous extends SelectableCommand {
     
     public FasterTwoBallAutonomous() {
         //1000 ticks is approximately 28 inches
+        
        addParallel(new TurnLightsOnCommand());
        addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
-       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0.20, PickUp.CLOSE));
+       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0.21, PickUp.CLOSE));
        addSequential(new WaitCommand(0.7));
-       addSequential(new DriveStraightCommand(0.75, 2500));
+       addSequential(new DriveStraightCommand(0.85, 3500));
        addSequential(new WaitCommand(0.15));
        addParallel(new PickUpDeploy(PickUp.DEPLOY, 0, PickUp.CLOSE));
        addSequential(new ShootSeries());
-       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0, PickUp.CLOSE));
-       addSequential(new WaitCommand(1));
-       addSequential(new WaitCommand(0));
        addParallel(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed, PickUp.CLOSE));
+       addSequential(new DriveStraightCommand(-0.75, -350));
+//       addParallel(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed, PickUp.CLOSE));
        addSequential(new WaitCommand(2.5));
        addSequential(new ShootSeries());  
     }

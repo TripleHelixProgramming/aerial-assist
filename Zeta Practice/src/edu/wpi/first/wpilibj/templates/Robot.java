@@ -10,12 +10,15 @@ package edu.wpi.first.wpilibj.templates;
 
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.camera.AxisCameraException;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.image.ColorImage;
+import edu.wpi.first.wpilibj.image.NIVisionException;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
-import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallHotGoalAutonomous;
+import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallHotGoaTurnAutonomous;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
 
 /**
@@ -36,7 +39,16 @@ public class Robot extends IterativeRobot {
     }
 
     public void autonomousInit() {
-//        autonomousCommand = new TwoBallHotGoalAutonomous();
+        try {
+            ColorImage image = OI.camera.getImage();
+            image.write("AutoImage.png");
+        } catch (AxisCameraException ex) {
+            ex.printStackTrace();
+        } catch (NIVisionException ex) {
+            ex.printStackTrace();
+        }
+        
+//        autonomousCommand = new TwoBallHotGoaTurnAutonomous();
         autonomousCommand = CommandBase.oi.getSelectedAutoCommand();
         autonomousCommand.start();
     }

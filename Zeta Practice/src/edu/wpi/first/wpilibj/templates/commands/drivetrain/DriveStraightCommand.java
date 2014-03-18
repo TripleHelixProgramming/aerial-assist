@@ -77,8 +77,8 @@ public class DriveStraightCommand extends PIDCommand {
     protected boolean isFinished() {
         try {
             SmartDashboard.putNumber("Distance", CommandBase.drivetrain.rightEncoder.getDistance());
-            System.out.println("Left Distance: " + CommandBase.drivetrain.leftEncoder.getDistance());
-            System.out.println("Right Distance: " + CommandBase.drivetrain.rightEncoder.getDistance());
+//            System.out.println("Left Distance: " + CommandBase.drivetrain.leftEncoder.getDistance());
+//            System.out.println("Right Distance: " + CommandBase.drivetrain.rightEncoder.getDistance());
         } catch (Exception e) {}
         return distanceController.onTarget();
     }  

@@ -62,7 +62,6 @@ public class Drivetrain extends Subsystem {
         throttleAverager.addValue(throttle);
         turningAverager.addValue(turn);
         robotDrive.arcadeDrive(throttleAverager.getAverage(), turningAverager.getAverage());
-        //System.out.println("Talon 1:" + Double.toString(backRight.get()));
     }
     public void tankDrive(double leftPower, double rightPower){
         robotDrive.tankDrive(leftPower, rightPower);

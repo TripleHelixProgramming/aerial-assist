@@ -16,10 +16,10 @@ public class ShootSeries extends CommandGroup {
     
     public ShootSeries() {
         addParallel(new PickUpDeploy(PickUp.DEPLOY, 0, PickUp.CLOSE));
-        addSequential(new WaitCommand(0.4));
+        addSequential(new WaitCommand(0.25));
         addSequential(new SetShooterPosition(Shooter.FIRE));
-        addSequential(new WaitCommand(0.5));
+        addSequential(new WaitCommand(0.2));
         addSequential(new SetShooterPosition(Shooter.PRIME));
-        addSequential(new WaitCommand(0.5));
+        addSequential(new WaitCommand(0.1));
         addParallel(new ResetArmCommand());    }
 }
