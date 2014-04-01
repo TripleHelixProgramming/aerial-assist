@@ -9,5 +9,5 @@ package edu.wpi.first.wpilibj.templates.util;
  * @author robotics
  */
 public interface ProvidesHotGoal {
-    public String getHotGoal();        
+    public String getHotGoal();  
 }
