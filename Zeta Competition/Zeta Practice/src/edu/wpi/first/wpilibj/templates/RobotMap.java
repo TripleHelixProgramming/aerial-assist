@@ -37,15 +37,15 @@ public class RobotMap {
     public static int bottomPickUpRoller = 9;
     
     //Solenoids Module 1
-    public static int shooterSolenoid1Port = 5; 
-    public static int shooterSolenoid2Port = 6;
+    public static int shooterSolenoid1Port = 1; 
+    public static int shooterSolenoid2Port = 2;
     
     //Solenoid Module 2
     public static int shiftSolenoid1Channel = 1;
     public static int shiftSolenoid2Channel = 2 ;
     public static int pickUpSolenoid1 = 3;
     public static int pickUpSolenoid2 = 4;
-    public static int wingSolenoidChannel = 7;
+    public static int wingSolenoidChannel = 5;
     
     //Digital IO Ports
     public static int leftEncoderChannelA = 2;

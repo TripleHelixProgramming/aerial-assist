@@ -4,12 +4,12 @@
  */
 package edu.wpi.first.wpilibj.templates.commands.autonomous;
 
-import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.DriveStraightCommand;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.ShiftCommand;
 import edu.wpi.first.wpilibj.templates.commands.lights.TurnLightsOnCommand;
 import edu.wpi.first.wpilibj.templates.commands.shooter.ShootSeries;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj.templates.util.HotGoalFinder;
 import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
 
 /**
@@ -19,11 +19,12 @@ import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
 public class RightHotGoalShootCommand extends SelectableCommand {
     
     public RightHotGoalShootCommand() { 
+        HotGoalProcessing hotGoalProc = new HotGoalProcessing();
         addParallel(new TurnLightsOnCommand());
         addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
-        addSequential(new DriveStraightCommand(0.90, 3500));
-        addSequential(new HotGoalProcessing(), 2);
-//        addSequential(new WaitCommand(0.7));
+        addSequential(new DriveStraightCommand(0.85, 3900));
+        addParallel(new HotGoalProcessing());
+        addSequential(new WaitForHotGoal(HotGoalFinder.RIGHT, hotGoalProc), 3);
         addSequential(new ShootSeries());
     }
 

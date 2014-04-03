@@ -50,14 +50,14 @@ public class HotGoalFinder {
                 image = OI.camera.getImage();
                 //ColorImage image;                           // next 2 lines read image from flash on cRIO
                 //.image = new RGBImage("/testImage.jpg");		// get the sample image from the cRIO flash
-                BinaryImage thresholdImage = image.thresholdRGB(0, 100, 100, 255, 100, 255);
-                thresholdImage.write("autonomous_images/ThresholdImage" + new Date().getTime() + ".png");
+                BinaryImage thresholdImage = image.thresholdRGB(0, 50, 150, 255, 150, 255);
+                thresholdImage.write("ThresholdImage.png");
                 //.thresholdHSV(105, 137, 230, 255, 133, 183);   // keep only green objects
-                //thresholdImage.write("/threshold.bmp");
+                //thresholdImage.write("threshold.png");
                 BinaryImage filteredImage = thresholdImage.particleFilter(cc);  
-                filteredImage.write("autonomous_images/FilteredImage" + new Date().getTime() + ".png");
+                filteredImage.write("FilteredImage.png");
                 // filter out small particles
-                //filteredImage.write("/filteredImage.bmp");
+                //filteredImage.write("filteredImage.bmp");
                 
                 //iterate through each particle and score to see if it is a target
                 Scores scores[] = new Scores[filteredImage.getNumberParticles()];
@@ -149,11 +149,11 @@ public class HotGoalFinder {
                                     if(target.Hot)
                                     {
                                         if(target.leftScore > target.rightScore){
-                                            SmartDashboard.putString("Hot Goal", "Left");
-                                           return LEFT;
-                                        }else{
                                             SmartDashboard.putString("Hot Goal", "Right");
-                                            return RIGHT;
+                                           return RIGHT;
+                                        }else{
+                                            SmartDashboard.putString("Hot Goal", "Left");
+                                            return LEFT;
                                         }
                                     } else {
                                         SmartDashboard.putString("Hot Goal", "None");

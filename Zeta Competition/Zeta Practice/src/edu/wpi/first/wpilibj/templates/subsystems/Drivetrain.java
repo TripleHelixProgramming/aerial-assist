@@ -30,8 +30,8 @@ public class Drivetrain extends Subsystem {
     private SpeedController backLeft = new Talon(RobotMap.backLeftTalonChannel);
     private SpeedController backRight = new Talon(RobotMap.backRightTalonChannel);
     
-    private Solenoid shiftSolenoid1 = new Solenoid(1, RobotMap.shiftSolenoid1Channel);
-    private Solenoid shiftSolenoid2 = new Solenoid(1, RobotMap.shiftSolenoid2Channel);
+    private Solenoid shiftSolenoid1 = new Solenoid(2, RobotMap.shiftSolenoid1Channel);
+    private Solenoid shiftSolenoid2 = new Solenoid(2, RobotMap.shiftSolenoid2Channel);
     
     private RobotDrive robotDrive = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
     
@@ -62,6 +62,8 @@ public class Drivetrain extends Subsystem {
         throttleAverager.addValue(throttle);
         turningAverager.addValue(turn);
         robotDrive.arcadeDrive(throttleAverager.getAverage(), turningAverager.getAverage());
+        System.out.println("left encoder: " + leftEncoder.getDistance());
+        System.out.println("right encoder: " + rightEncoder.getDistance());
     }
     public void tankDrive(double leftPower, double rightPower){
         robotDrive.tankDrive(leftPower, rightPower);

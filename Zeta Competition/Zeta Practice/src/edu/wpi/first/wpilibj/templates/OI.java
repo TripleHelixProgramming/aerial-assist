@@ -9,7 +9,8 @@ import edu.wpi.first.wpilibj.templates.commands.autonomous.FasterTwoBallAutonomo
 import edu.wpi.first.wpilibj.templates.commands.autonomous.LeftHotGoalShootCommand;
 import edu.wpi.first.wpilibj.templates.commands.autonomous.RightHotGoalShootCommand;
 import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomous;
-import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallHotGoaTurnAutonomous;
+import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomousHotGoal;
+import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomousWithPickUp;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.ShiftCommand;
 import edu.wpi.first.wpilibj.templates.commands.pickup.PassCommand;
 import edu.wpi.first.wpilibj.templates.commands.pickup.PickUpDeploy;
@@ -20,6 +21,7 @@ import edu.wpi.first.wpilibj.templates.commands.shooter.ShootSeries;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.templates.subsystems.PickUp;
 import edu.wpi.first.wpilibj.templates.util.AutonomousSelector;
+import edu.wpi.first.wpilibj.templates.util.HotGoalFinder;
 import edu.wpi.first.wpilibj.templates.util.NoneCommand;
 import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
 
@@ -71,8 +73,9 @@ public class OI {
         autonomousCommandsList.add(new RightHotGoalShootCommand());// 2
         autonomousCommandsList.add(new TwoBallAutonomous());// 3
         autonomousCommandsList.add(new FasterTwoBallAutonomous());// 4
-        autonomousCommandsList.add(new TwoBallHotGoaTurnAutonomous());// 5
-        autonomousCommandsList.add(new NoneCommand());// 6
+        autonomousCommandsList.add(new TwoBallAutonomousHotGoal(HotGoalFinder.LEFT));// 5
+        autonomousCommandsList.add(new TwoBallAutonomousHotGoal(HotGoalFinder.RIGHT));// 6
+        autonomousCommandsList.add(new TwoBallAutonomousWithPickUp());// 7
         autoSelector.setCommands(autonomousCommandsList);
         
         //Joystick Buttons: Operator Control
@@ -134,7 +137,7 @@ public class OI {
     
     // Methods
     public boolean isRollerOn(){
-        return rollerPowerButton.get();
+        return !rollerPowerButton.get();
     }
     public SelectableCommand getSelectedAutoCommand(){
         return autoSelector.getSelectedCommand();

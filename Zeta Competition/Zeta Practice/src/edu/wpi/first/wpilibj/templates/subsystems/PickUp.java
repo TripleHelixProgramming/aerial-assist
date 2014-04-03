@@ -23,10 +23,10 @@ public class PickUp extends Subsystem {
     public static final boolean OPEN = true;
     public static final boolean CLOSE = false;
     
-    private Solenoid shooterSolenoid1 = new Solenoid(1, RobotMap.pickUpSolenoid1);
-    private Solenoid shooterSolenoid2 = new Solenoid(1, RobotMap.pickUpSolenoid2);
+    private Solenoid pickUpSolenoid1 = new Solenoid(2, RobotMap.pickUpSolenoid1);
+    private Solenoid pickUpSolenoid2 = new Solenoid(2, RobotMap.pickUpSolenoid2);
     
-    private Solenoid wingSolenoid = new Solenoid(1, RobotMap.wingSolenoidChannel);
+    private Solenoid wingSolenoid = new Solenoid(2, RobotMap.wingSolenoidChannel);
     
     private SpeedController upperPickUp = new Talon(RobotMap.upperPickUpRoller);
     
@@ -45,8 +45,8 @@ public class PickUp extends Subsystem {
     }
     
     public void deployArm(boolean deploy){
-       shooterSolenoid1.set(!deploy);
-       shooterSolenoid2.set(deploy);
+       pickUpSolenoid1.set(!deploy);
+       pickUpSolenoid2.set(deploy);
     }
     public void fireCatch(boolean deploy){
         wingSolenoid.set(deploy);

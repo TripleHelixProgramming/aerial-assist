@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.image.NIVisionException;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
-import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallHotGoaTurnAutonomous;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
 
 /**
