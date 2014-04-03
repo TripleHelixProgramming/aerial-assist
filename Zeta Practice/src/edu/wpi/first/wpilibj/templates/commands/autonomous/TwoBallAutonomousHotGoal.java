@@ -31,11 +31,11 @@ public class TwoBallAutonomousHotGoal extends SelectableCommand {
 
        addParallel(new TurnLightsOnCommand());
        addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
-       addSequential(new DriveStraightCommand(0.95, 3800));
+       addSequential(new DriveStraightCommand(0.95, /*3800*/ 0));
        addSequential(new ShootSeries());
        addParallel(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed, PickUp.CLOSE));
-       addSequential(new DriveStraightCommand(-0.95, -4250));
-       addParallel(hotGoalProc);
+       addSequential(new DriveStraightCommand(-0.95, /*-4250*/ -0));
+       addSequential(hotGoalProc, 1);
        addSequential(new WaitCommand(1));
        if (startingSide.equals(HotGoalFinder.LEFT)) {
             addSequential(new TurnToHotGoal(hotGoalProc, HotGoalFinder.RIGHT));
@@ -43,7 +43,7 @@ public class TwoBallAutonomousHotGoal extends SelectableCommand {
             addSequential(new TurnToHotGoal(hotGoalProc, HotGoalFinder.LEFT));
        }
        addParallel(new PickUpDeploy(PickUp.RETRACT, 0, PickUp.CLOSE));
-       addSequential(new DriveStraightCommand(0.95, 4250));
+       addSequential(new DriveStraightCommand(0.95, /*4250*/ 0));
        addSequential(new ShootSeries());
     }
 

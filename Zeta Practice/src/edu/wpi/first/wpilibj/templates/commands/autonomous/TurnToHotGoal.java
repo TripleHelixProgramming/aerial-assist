@@ -6,6 +6,7 @@ package edu.wpi.first.wpilibj.templates.commands.autonomous;
 
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.TurnCommand;
+import edu.wpi.first.wpilibj.templates.util.HotGoalFinder;
 import edu.wpi.first.wpilibj.templates.util.ProvidesHotGoal;
 
 /**
@@ -32,7 +33,9 @@ public class TurnToHotGoal extends TurnCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (hotGoalProc.getHotGoal().equals(turnToSide) || super.isFinished()) {
+        System.out.println("Hot Goal Found: " + hotGoalProc.getHotGoal());
+        String startingSide = turnToSide.equals(HotGoalFinder.RIGHT) ? HotGoalFinder.LEFT : HotGoalFinder.RIGHT;
+        if (!hotGoalProc.getHotGoal().equals(startingSide) || super.isFinished()) {
             return true;
         } else {
             return false;
