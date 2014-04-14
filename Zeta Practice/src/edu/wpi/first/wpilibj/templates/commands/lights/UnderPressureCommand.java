@@ -21,7 +21,7 @@ public class UnderPressureCommand extends CommandBase {
     }
 
     protected void execute() {
-        if (lights.getPressure() < 80) {
+        if (lights.getPressure() < 85) {
             lights.turnOn(false);
         } else {
             lights.turnOn(true);

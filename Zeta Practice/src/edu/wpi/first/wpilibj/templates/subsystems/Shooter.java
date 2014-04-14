@@ -7,6 +7,7 @@ package edu.wpi.first.wpilibj.templates.subsystems;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.templates.RobotMap;
+import edu.wpi.first.wpilibj.templates.commands.shooter.SetShooterPosition;
 
 /**
  *
@@ -17,11 +18,11 @@ public class Shooter extends Subsystem {
     public static final boolean FIRE = true;
     public static final boolean PRIME = false;
     
-    private Solenoid shooterSolenoid = new Solenoid(RobotMap.shooterSolenoid1Port);
-    private Solenoid shooterSolenoid2 = new Solenoid(RobotMap.shooterSolenoid2Port);
+    private Solenoid shooterSolenoid = new Solenoid(1, RobotMap.shooterSolenoid1Port);
+    private Solenoid shooterSolenoid2 = new Solenoid(1, RobotMap.shooterSolenoid2Port);
 
     public void initDefaultCommand() {
-        
+        setDefaultCommand(new SetShooterPosition(Shooter.PRIME));
     }
     
     public void primeShooter(boolean prime){

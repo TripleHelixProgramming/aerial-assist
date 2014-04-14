@@ -33,10 +33,8 @@ public class PickUpDeploy extends CommandBase {
     protected void execute() {
          if(oi.isRollerOn()){
             pickUp.setRollerSpeed(rollerSpeed);
-            System.out.println("Roller On");
         }else{
             pickUp.setRollerSpeed(0);
-            System.out.println("Roller Off");
         }
     }
 
