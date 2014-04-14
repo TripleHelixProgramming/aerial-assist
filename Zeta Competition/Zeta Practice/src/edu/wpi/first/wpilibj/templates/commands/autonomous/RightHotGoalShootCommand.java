@@ -21,10 +21,10 @@ public class RightHotGoalShootCommand extends SelectableCommand {
     public RightHotGoalShootCommand() { 
         HotGoalProcessing hotGoalProc = new HotGoalProcessing();
         addParallel(new TurnLightsOnCommand());
+        addParallel(new HotGoalProcessing());
+        addSequential(new WaitForHotGoal(HotGoalFinder.RIGHT, hotGoalProc), 5);
         addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
         addSequential(new DriveStraightCommand(0.85, 3900));
-        addParallel(new HotGoalProcessing());
-        addSequential(new WaitForHotGoal(HotGoalFinder.RIGHT, hotGoalProc), 3);
         addSequential(new ShootSeries());
     }
 

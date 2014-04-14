@@ -50,7 +50,7 @@ public class HotGoalFinder {
                 image = OI.camera.getImage();
                 //ColorImage image;                           // next 2 lines read image from flash on cRIO
                 //.image = new RGBImage("/testImage.jpg");		// get the sample image from the cRIO flash
-                BinaryImage thresholdImage = image.thresholdRGB(0, 50, 150, 255, 150, 255);
+                BinaryImage thresholdImage = image.thresholdRGB(0, 50, 150, 255, 25, 100);
                 thresholdImage.write("ThresholdImage.png");
                 //.thresholdHSV(105, 137, 230, 255, 133, 183);   // keep only green objects
                 //thresholdImage.write("threshold.png");
@@ -149,11 +149,11 @@ public class HotGoalFinder {
                                     if(target.Hot)
                                     {
                                         if(target.leftScore > target.rightScore){
-                                            SmartDashboard.putString("Hot Goal", "Right");
-                                           return RIGHT;
-                                        }else{
                                             SmartDashboard.putString("Hot Goal", "Left");
-                                            return LEFT;
+                                           return LEFT;
+                                        }else{
+                                            SmartDashboard.putString("Hot Goal", "Right");
+                                            return RIGHT;
                                         }
                                     } else {
                                         SmartDashboard.putString("Hot Goal", "None");
