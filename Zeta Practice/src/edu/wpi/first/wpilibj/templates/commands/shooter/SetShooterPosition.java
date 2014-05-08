@@ -18,7 +18,7 @@ public class SetShooterPosition extends CommandBase {
     }
 
     protected void initialize() {
-        System.out.println("Setting Shooter Position ");
+//        System.out.println("Setting Shooter Position ");
     }
     
     protected void execute() {
@@ -30,7 +30,7 @@ public class SetShooterPosition extends CommandBase {
     }
 
     protected void end() {
-        System.out.println("Shooter Position Set");
+//        System.out.println("Shooter Position Set");
     }
 
     protected void interrupted() {

@@ -2,28 +2,25 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.wpi.first.wpilibj.templates.commands.autonomous;
+package edu.wpi.first.wpilibj.templates.commands.shooter;
 
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
-import edu.wpi.first.wpilibj.templates.util.ProvidesDirection;
 
 /**
  *
  * @author robotics
  */
-public class WaitForHotGoal extends CommandBase {
-    private String hotPosition;
-    private ProvidesDirection providesHotGoal;
-            
-    public WaitForHotGoal(String hotPosition, ProvidesDirection providesHotGoal) {
-        this.hotPosition = hotPosition;
-        this.providesHotGoal = providesHotGoal;
+public class FireBlocker extends CommandBase {
+    
+    public FireBlocker() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        shooter.blockerPole1.set(false);
+        shooter.blockerPole2.set(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,8 +29,7 @@ public class WaitForHotGoal extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        System.out.println(hotPosition + " = " + providesHotGoal.getDirection());
-        return hotPosition.equals(providesHotGoal.getDirection());
+        return false;
     }
 
     // Called once after isFinished returns true

@@ -7,8 +7,6 @@
 
 package edu.wpi.first.wpilibj.templates;
 
-
-
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.camera.AxisCameraException;
 import edu.wpi.first.wpilibj.command.Command;
@@ -19,6 +17,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj.templates.util.CheesyVisionServer;
+import edu.wpi.first.wpilibj.templates.util.HotGoalFinder;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,20 +32,20 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
     
     public void robotInit() {
-        
+        CheesyVisionServer server = CheesyVisionServer.getInstance();
+        server.start();
         CommandBase.init();
-        
     }
 
     public void autonomousInit() {
-        try {
-            ColorImage image = OI.camera.getImage();
-            image.write("AutoImage.png");
-        } catch (AxisCameraException ex) {
-            ex.printStackTrace();
-        } catch (NIVisionException ex) {
-            ex.printStackTrace();
-        }
+//        try {
+//            ColorImage image = OI.camera.getImage();
+//            image.write("AutoImage.png");
+//        } catch (AxisCameraException ex) {
+//            ex.printStackTrace();
+//        } catch (NIVisionException ex) {
+//            ex.printStackTrace();
+//        }
         
 //        autonomousCommand = new TwoBallHotGoaTurnAutonomous();
         autonomousCommand = CommandBase.oi.getSelectedAutoCommand();

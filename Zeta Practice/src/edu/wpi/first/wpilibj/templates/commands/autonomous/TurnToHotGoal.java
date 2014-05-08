@@ -7,7 +7,7 @@ package edu.wpi.first.wpilibj.templates.commands.autonomous;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.TurnCommand;
 import edu.wpi.first.wpilibj.templates.util.HotGoalFinder;
-import edu.wpi.first.wpilibj.templates.util.ProvidesHotGoal;
+import edu.wpi.first.wpilibj.templates.util.ProvidesDirection;
 
 /**
  *
@@ -15,11 +15,11 @@ import edu.wpi.first.wpilibj.templates.util.ProvidesHotGoal;
  */
 public class TurnToHotGoal extends TurnCommand {
     
-    private ProvidesHotGoal hotGoalProc;
+    private ProvidesDirection hotGoalProc;
     private String turnToSide;
     
-    public TurnToHotGoal(ProvidesHotGoal hotGoalProc, String turnToSide) {
-        super(turnToSide, 0.85, 500);
+    public TurnToHotGoal(ProvidesDirection hotGoalProc, String turnToSide) {
+        super(hotGoalProc, 0.85, 500);
         this.turnToSide = turnToSide;
         this.hotGoalProc = hotGoalProc;
         // Use requires() here to declare subsystem dependencies
@@ -33,9 +33,9 @@ public class TurnToHotGoal extends TurnCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        System.out.println("Hot Goal Found: " + hotGoalProc.getHotGoal());
+        System.out.println("Hot Goal Found: " + hotGoalProc.getDirection());
         String startingSide = turnToSide.equals(HotGoalFinder.RIGHT) ? HotGoalFinder.LEFT : HotGoalFinder.RIGHT;
-        if (!hotGoalProc.getHotGoal().equals(startingSide) || super.isFinished()) {
+        if (!hotGoalProc.getDirection().equals(startingSide) || super.isFinished()) {
             return true;
         } else {
             return false;

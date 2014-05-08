@@ -7,13 +7,13 @@ package edu.wpi.first.wpilibj.templates.commands.autonomous;
 import edu.wpi.first.wpilibj.image.CriteriaCollection;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.util.HotGoalFinder;
-import edu.wpi.first.wpilibj.templates.util.ProvidesHotGoal;
+import edu.wpi.first.wpilibj.templates.util.ProvidesDirection;
 
 /**
  *
  * @author robotics
  */
-public class HotGoalProcessing extends CommandBase implements ProvidesHotGoal{
+public class HotGoalProcessing extends CommandBase implements ProvidesDirection{
     CriteriaCollection cc;
     private String currentGoal = HotGoalFinder.NONE;
     HotGoalFinder finder = new HotGoalFinder();
@@ -46,7 +46,7 @@ public class HotGoalProcessing extends CommandBase implements ProvidesHotGoal{
         
     }
 
-    public String getHotGoal() {
+    public String getDirection() {
         return currentGoal;
     }
 }

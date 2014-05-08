@@ -5,6 +5,7 @@
 package edu.wpi.first.wpilibj.templates.commands.pickup;
 
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
+import edu.wpi.first.wpilibj.templates.subsystems.PickUp;
 
 
     // Called repeatedly when this Command is scheduled to run
@@ -17,6 +18,10 @@ public class PickUpDeploy extends CommandBase {
     private boolean deploy;
     private double rollerSpeed;
     private boolean openWings;
+    
+    public PickUpDeploy(boolean deploy, double rollerSpeed) {
+        this(deploy, rollerSpeed, PickUp.CLOSE);
+    }
     
     public PickUpDeploy(boolean deploy, double rollerSpeed, boolean openWings) {
         requires(pickUp);

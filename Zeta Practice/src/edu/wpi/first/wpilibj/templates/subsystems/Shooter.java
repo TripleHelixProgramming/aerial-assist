@@ -14,6 +14,10 @@ import edu.wpi.first.wpilibj.templates.commands.shooter.SetShooterPosition;
  * @author robotics
  */
 public class Shooter extends Subsystem {
+    public String currentHot;
+    
+    public Solenoid blockerPole1 = new Solenoid(2, RobotMap.blockerPolePort1);
+    public Solenoid blockerPole2 = new Solenoid(2, RobotMap.blockerPolePort2);
     
     public static final boolean FIRE = true;
     public static final boolean PRIME = false;
@@ -26,7 +30,7 @@ public class Shooter extends Subsystem {
     }
     
     public void primeShooter(boolean prime){
-        System.out.println("IN PRIME SHOOTER " + prime);
+        //System.out.println("IN PRIME SHOOTER " + prime);
         shooterSolenoid.set(prime);
         shooterSolenoid2.set(prime);
     }
