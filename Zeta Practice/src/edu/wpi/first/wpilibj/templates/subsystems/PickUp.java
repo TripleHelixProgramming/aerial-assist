@@ -35,7 +35,7 @@ public class PickUp extends Subsystem {
     private RollingAverager pickUpAverager = new RollingAverager(20, 0);
     
     public void initDefaultCommand() {
-        setDefaultCommand(new PickUpDeploy(RETRACT, 0, CLOSE));
+        setDefaultCommand(new PickUpDeploy(RETRACT, 0));
     }
     
     public void setRollerSpeed(double power) {

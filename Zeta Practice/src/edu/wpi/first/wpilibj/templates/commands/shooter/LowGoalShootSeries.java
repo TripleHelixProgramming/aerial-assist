@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.templates.subsystems.PickUp;
 public class LowGoalShootSeries extends CommandGroup {
     
     public LowGoalShootSeries() {
-        addParallel(new PickUpDeploy(PickUp.DEPLOY, 0, PickUp.CLOSE));
+        addParallel(new PickUpDeploy(PickUp.DEPLOY, 0));
         addSequential(new WaitCommand(0.8));
         addSequential(new LowGoalShot(6, 1, 3));
         addParallel(new ResetArmCommand());
