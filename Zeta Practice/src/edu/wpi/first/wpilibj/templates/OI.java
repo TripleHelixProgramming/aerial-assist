@@ -5,22 +5,20 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.camera.AxisCamera;
 import edu.wpi.first.wpilibj.networktables2.util.List;
-import edu.wpi.first.wpilibj.templates.commands.autonomous.FasterTwoBallAutonomous;
-import edu.wpi.first.wpilibj.templates.commands.autonomous.LeftHotGoalShootCommand;
-import edu.wpi.first.wpilibj.templates.commands.autonomous.RightHotGoalShootCommand;
+import edu.wpi.first.wpilibj.templates.commands.autonomous.BlockerDrive;
+import edu.wpi.first.wpilibj.templates.commands.autonomous.HotGoalCheesy;
 import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomous;
-import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallHotGoalAutonomous;
+import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomousHotGoal;
+import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomousWithPickUp;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.ShiftCommand;
 import edu.wpi.first.wpilibj.templates.commands.pickup.PassCommand;
 import edu.wpi.first.wpilibj.templates.commands.pickup.PickUpDeploy;
 import edu.wpi.first.wpilibj.templates.commands.pickup.RollerPowerDashboardSet;
 import edu.wpi.first.wpilibj.templates.commands.shooter.LowGoalShootSeries;
-import edu.wpi.first.wpilibj.templates.commands.shooter.LowGoalShot;
 import edu.wpi.first.wpilibj.templates.commands.shooter.ShootSeries;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.templates.subsystems.PickUp;
 import edu.wpi.first.wpilibj.templates.util.AutonomousSelector;
-import edu.wpi.first.wpilibj.templates.util.NoneCommand;
 import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
 
 /**
@@ -42,9 +40,9 @@ public class OI {
     private JoystickButton catchButton;
     
     //Joystick Buttons: Gamepad
-    private JoystickButton talonToggleButton;
-    private JoystickButton shiftUpButton;
-    private JoystickButton shiftDownButton;
+    private JoystickButton shiftUpButton; 
+    private JoystickButton shiftDownButton; 
+    private JoystickButton kissPassButton;
     
     //Other Buttons
     private JoystickButton autoSelectorButton1;
@@ -55,9 +53,7 @@ public class OI {
     public static AxisCamera camera;
     private AutonomousSelector autoSelector;
     
-    public OI(){
-        //camera = AxisCamera.getInstance();
-        
+    public OI() {     
         //Autonomous Selector
         autoSelectorButton1 = new JoystickButton(operatorControl, RobotMap.autoSelectorButton1);
         autoSelectorButton2 = new JoystickButton(operatorControl, RobotMap.autoSelectorButton2);
@@ -66,13 +62,11 @@ public class OI {
         List autonomousCommandsList = new List();
         
         //Autonomous Selector Command
-        autonomousCommandsList.add(new NoneCommand());// 1
-        autonomousCommandsList.add(new LeftHotGoalShootCommand());// 2
-        autonomousCommandsList.add(new RightHotGoalShootCommand());// 3
-        autonomousCommandsList.add(new TwoBallAutonomous());// 4
-        autonomousCommandsList.add(new FasterTwoBallAutonomous());// 5
-        autonomousCommandsList.add(new TwoBallHotGoalAutonomous());// 6
-        autonomousCommandsList.add(new NoneCommand());// 7
+        autonomousCommandsList.add(new HotGoalCheesy());// 0
+        autonomousCommandsList.add(new TwoBallAutonomous());// 1
+        autonomousCommandsList.add(new TwoBallAutonomousHotGoal());// 2
+        autonomousCommandsList.add(new TwoBallAutonomousWithPickUp());// 3
+        autonomousCommandsList.add(new BlockerDrive(0.70));// 4
         autoSelector.setCommands(autonomousCommandsList);
         
         //Joystick Buttons: Operator Control
@@ -80,11 +74,10 @@ public class OI {
         new RollerPowerDashboardSet().start();
         
         pickUpDeployButton = new JoystickButton(operatorControl, RobotMap.pickUpDeployButton);
-        pickUpDeployButton.whileHeld(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed, PickUp.CLOSE));
+        pickUpDeployButton.whileHeld(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed));
         
         passButton = new JoystickButton (operatorControl, RobotMap.releaseBallButton);
         passButton.whenPressed(new PassCommand());
-        //passButton.whileHeld(new PickUpDeploy (PickUp.RETRACT, -1));
         
         shootButton = new JoystickButton(operatorControl, RobotMap.shootButton);
         shootButton.whenPressed(new ShootSeries());
@@ -101,9 +94,12 @@ public class OI {
         
         shiftDownButton = new JoystickButton(gamepad, RobotMap.shiftDownButton);
         shiftDownButton.whenPressed(new ShiftCommand(Drivetrain.LOW_GEAR));
+        
+        kissPassButton = new JoystickButton (gamepad, RobotMap.kissPassButton);
+        kissPassButton.whileHeld(new PickUpDeploy(PickUp.RETRACT, RobotMap.intakeRollerSpeed));
     }
     
-    public double getThrottle(){
+    public double getThrottle() {
         // Xbox Controller
         if(practice){
             if(gamepad.getZ() < 0){
@@ -117,7 +113,8 @@ public class OI {
         }
         return gamepad.getRawAxis(2);
     }
-    public double getTurn(){
+    
+    public double getTurn() {
         if(practice){
             // Xbox Controller
             if(gamepad.getZ() > 0){
@@ -134,9 +131,10 @@ public class OI {
     }
     
     // Methods
-    public boolean isRollerOn(){
-        return rollerPowerButton.get();
+    public boolean isRollerOn() {
+        return !rollerPowerButton.get();
     }
+    
     public SelectableCommand getSelectedAutoCommand(){
         return autoSelector.getSelectedCommand();
     }

@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.templates.RobotMap;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.DriveStraightCommand;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.ShiftCommand;
-import edu.wpi.first.wpilibj.templates.commands.drivetrain.TurnCommand;
+import edu.wpi.first.wpilibj.templates.commands.lights.TurnLightsOnCommand;
 import edu.wpi.first.wpilibj.templates.commands.pickup.PickUpDeploy;
 import edu.wpi.first.wpilibj.templates.commands.shooter.ShootSeries;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
@@ -19,24 +19,25 @@ import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
  *
  * @author robotics
  */
-public class TwoBallHotGoalAutonomous extends SelectableCommand {
+public class TwoBallAutonomousWithPickUp extends SelectableCommand {
     
-    public TwoBallHotGoalAutonomous() {
-       HotGoalProcessing hotGoal = new HotGoalProcessing();
+    public TwoBallAutonomousWithPickUp() {
+       //1000 ticks is approximately 28 inches
+       addParallel(new TurnLightsOnCommand());
        addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
-       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0.3, PickUp.CLOSE));
-       addSequential(new WaitCommand(0.5));
-       addSequential(new DriveStraightCommand(0.55, 1500));
-       addParallel(new PickUpDeploy(PickUp.DEPLOY, 0, PickUp.CLOSE));
-       addSequential(hotGoal, 1);
-       addSequential(new TurnCommand(hotGoal, 0.55, 250));
+       addSequential(new DriveStraightCommand(0.90, 3500));
        addSequential(new ShootSeries());
        addParallel(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed, PickUp.CLOSE));
-       addSequential(new TurnCommand(hotGoal, -0.55, -500));
+       addSequential(new DriveStraightCommand(-0.90, -3850));
+       addSequential(new WaitCommand(0.4));
+       addParallel(new PickUpDeploy(PickUp.RETRACT, 0, PickUp.CLOSE));
+       addSequential(new DriveStraightCommand(0.90, 3850));
        addSequential(new ShootSeries());
+       addParallel(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed, PickUp.CLOSE));
+       addSequential(new DriveStraightCommand(-0.90, -5600));
     }
 
     public String getCommandName() {
-        return "Two Ball Hot Goal";
+        return "Shoot two Ball, Pick Up One";
     }
 }

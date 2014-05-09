@@ -38,17 +38,17 @@ public class PickUp extends Subsystem {
         setDefaultCommand(new PickUpDeploy(RETRACT, 0, CLOSE));
     }
     
-    public void setRollerSpeed(double power){
+    public void setRollerSpeed(double power) {
         powerLevel = power;
         pickUpAverager.addValue(powerLevel);
         upperPickUp.set(pickUpAverager.getAverage());
     }
     
-    public void deployArm(boolean deploy){
+    public void deployArm(boolean deploy) {
        shooterSolenoid1.set(!deploy);
        shooterSolenoid2.set(deploy);
     }
-    public void fireCatch(boolean deploy){
+    public void deployCatch(boolean deploy) {
         wingSolenoid.set(deploy);
     }
 }

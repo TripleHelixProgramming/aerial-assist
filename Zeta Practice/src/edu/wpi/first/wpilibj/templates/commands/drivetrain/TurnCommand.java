@@ -5,19 +5,19 @@
 package edu.wpi.first.wpilibj.templates.commands.drivetrain;
 
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
-import edu.wpi.first.wpilibj.templates.util.HotGoalFinder;
-import edu.wpi.first.wpilibj.templates.util.ProvidesHotGoal;
-
+import edu.wpi.first.wpilibj.templates.util.HotGoalLocation;
+import edu.wpi.first.wpilibj.templates.util.ProvidesDirection;
 /**
  *
  * @author robotics
  */
 public class TurnCommand extends CommandBase {
+    
     private double powerLevel;
     private double distance;
-    private ProvidesHotGoal direction;
+    private ProvidesDirection direction;
     
-    public TurnCommand(ProvidesHotGoal direction, double powerLevel, double distance) {
+    public TurnCommand(ProvidesDirection direction, double powerLevel, double distance) {
         requires(drivetrain);
         
         this.distance = distance;
@@ -28,24 +28,27 @@ public class TurnCommand extends CommandBase {
     protected void initialize() {
         drivetrain.rightEncoder.reset();
         drivetrain.rightEncoder.start();
-        System.out.println("Direction" + direction.getHotGoal());
+        System.out.println("Direction" + direction);
+        System.out.println("Left Encoder: " + CommandBase.drivetrain.leftEncoder.getDistance());
+        System.out.println("Right Encoder: " + CommandBase.drivetrain.rightEncoder.getDistance());
     }
 
     protected void execute() {
-        if(direction.getHotGoal().equals(HotGoalFinder.RIGHT)){
-            System.out.println("Turn Right");
+        if(direction.getDirection().equals(HotGoalLocation.RIGHT)){
             drivetrain.tankDrive(0, powerLevel);
-        }else {
-            System.out.println("Turn Left");
+        } else {
             drivetrain.tankDrive(powerLevel, 0);
         }
     }
 
     protected boolean isFinished() {
-        if(Math.abs(drivetrain.rightEncoder.getDistance()) >= Math.abs(distance)) {
+        if(direction.getDirection().equals(HotGoalLocation.RIGHT) && Math.abs(drivetrain.rightEncoder.getDistance()) >= Math.abs(distance) - 5) {
             System.out.println("Finished turning");
             return true;
-        }else{
+        } else if (direction.getDirection().equals(HotGoalLocation.LEFT) && Math.abs(drivetrain.leftEncoder.getDistance()) >= Math.abs(distance)  - 5) {
+            System.out.println("Finished turning");
+            return true;
+        } else {
             return false;
         }
     }
@@ -54,6 +57,5 @@ public class TurnCommand extends CommandBase {
         drivetrain.tankDrive(0, 0);
     }
 
-    protected void interrupted() {
-    }
+    protected void interrupted() { }
 }
