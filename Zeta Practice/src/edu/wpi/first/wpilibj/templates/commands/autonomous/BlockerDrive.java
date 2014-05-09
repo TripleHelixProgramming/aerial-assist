@@ -5,6 +5,7 @@
 package edu.wpi.first.wpilibj.templates.commands.autonomous;
 
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
+import edu.wpi.first.wpilibj.templates.subsystems.Shooter;
 import edu.wpi.first.wpilibj.templates.util.CheesyVisionServer;
 import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
 
@@ -26,8 +27,7 @@ public class BlockerDrive extends SelectableCommand {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        CommandBase.shooter.blockerPole1.set(false);
-        CommandBase.shooter.blockerPole2.set(true);
+        CommandBase.shooter.setBlocker(Shooter.UP);
     }
 
     // Called repeatedly when this Command is scheduled to run

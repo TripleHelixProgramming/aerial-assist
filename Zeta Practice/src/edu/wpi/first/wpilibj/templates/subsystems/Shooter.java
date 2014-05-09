@@ -21,6 +21,9 @@ public class Shooter extends Subsystem {
     public static final boolean FIRE = true;
     public static final boolean PRIME = false;
     
+    public static final boolean UP = false;
+    public static final boolean DOWN = true;
+    
     private Solenoid shooterSolenoid = new Solenoid(RobotMap.shooterSolenoid1Port);
     private Solenoid shooterSolenoid2 = new Solenoid(RobotMap.shooterSolenoid2Port);
 
@@ -32,5 +35,9 @@ public class Shooter extends Subsystem {
         //System.out.println("IN PRIME SHOOTER " + prime);
         shooterSolenoid.set(prime);
         shooterSolenoid2.set(prime);
+    }
+    public void setBlocker(boolean set) {
+        blockerPole1.set(set); 
+        blockerPole2.set(!set);
     }
 }
