@@ -6,19 +6,17 @@ package edu.wpi.first.wpilibj.templates.commands.autonomous;
 
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.util.CheesyVisionServer;
-import edu.wpi.first.wpilibj.templates.util.HotGoalFinder;
+import edu.wpi.first.wpilibj.templates.util.HotGoalLocation;
 import edu.wpi.first.wpilibj.templates.util.ProvidesDirection;
 
 /**
  *
  * @author robotics
  */
-public class WaitForAnyGoal extends CommandBase implements ProvidesDirection{
+public class WaitForAnyGoal extends CommandBase implements ProvidesDirection {
+    
     private CheesyVisionServer server = CheesyVisionServer.getInstance();
-    public String currentHot = HotGoalFinder.LEFT;
-    public WaitForAnyGoal() {
-       
-    }
+    public String currentHot = HotGoalLocation.LEFT;
 
     // Called just before this Command runs the first time
     protected void initialize() {
@@ -29,10 +27,10 @@ public class WaitForAnyGoal extends CommandBase implements ProvidesDirection{
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         if (server.getLeftStatus()) {
-            currentHot = HotGoalFinder.LEFT;
+            currentHot = HotGoalLocation.LEFT;
             System.out.println("Found left hot goal");
         } else if (server.getRightStatus()) {
-            currentHot = HotGoalFinder.RIGHT;
+            currentHot = HotGoalLocation.RIGHT;
             System.out.println("Found right hot goal");
         } else {
             System.out.println("Found no hot goal");
@@ -41,7 +39,7 @@ public class WaitForAnyGoal extends CommandBase implements ProvidesDirection{
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        System.out.println("CurrentHot: " + currentHot);
+        System.out.println("Current Hot: " + currentHot);
         return (server.getLeftStatus() || server.getRightStatus());
     }
 

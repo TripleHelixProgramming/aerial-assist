@@ -6,16 +6,13 @@ package edu.wpi.first.wpilibj.templates.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.templates.RobotMap;
-import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.DriveStraightCommand;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.ShiftCommand;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.TurnCommand;
-import edu.wpi.first.wpilibj.templates.commands.lights.TurnLightsOnCommand;
 import edu.wpi.first.wpilibj.templates.commands.pickup.PickUpDeploy;
 import edu.wpi.first.wpilibj.templates.commands.shooter.ShootSeries;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.templates.subsystems.PickUp;
-import edu.wpi.first.wpilibj.templates.util.HotGoalFinder;
 import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
 
 /**
@@ -43,9 +40,7 @@ public class TwoBallAutonomousHotGoal extends SelectableCommand {
         addSequential(new WaitCommand(0.75));
         addSequential(secondTurn, 0.5);
         addSequential(new TurnCommand(secondTurn, 0.65, 300));
-        addSequential(new ShootSeries());
-        
-        
+        addSequential(new ShootSeries()); 
     }
 
     public String getCommandName() {

@@ -32,7 +32,7 @@ public class PickUpDeploy extends CommandBase {
 
     protected void initialize() {
         pickUp.deployArm(deploy);
-        pickUp.fireCatch(openWings);
+        pickUp.deployCatch(openWings);
     }
 
     protected void execute() {
@@ -47,10 +47,7 @@ public class PickUpDeploy extends CommandBase {
         return false;
     }
 
-    protected void end() {
-        
-    }
+    protected void end() { }
 
-    protected void interrupted() {
-    }
+    protected void interrupted() { }
 }

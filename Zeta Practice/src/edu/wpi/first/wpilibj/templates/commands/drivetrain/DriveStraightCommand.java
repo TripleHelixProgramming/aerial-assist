@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.util.GenericPIDOutput;
-//import edu.wpi.first.wpilibj.templates.Robot;
 
 
 /**
@@ -26,7 +25,6 @@ public class DriveStraightCommand extends PIDCommand {
     public DriveStraightCommand(double power, int inches) {
         super(.0016, 0.00009, 0); //This is for turning
         this.power = power;
-//        this.distance = convertToTicks(inches, 1.47058824, 4);
         this.distance = -inches;
         requires(CommandBase.drivetrain);
         this.setRunWhenDisabled(false);
@@ -37,24 +35,14 @@ public class DriveStraightCommand extends PIDCommand {
     protected double returnPIDInput() {
         double left = CommandBase.drivetrain.leftEncoder.getDistance();
         double right = CommandBase.drivetrain.rightEncoder.getDistance();
-        try {
-            SmartDashboard.putNumber("Difference", left - right);
-        } catch (Exception e) {}
         return left - right;
     }
 
     protected void usePIDOutput(double d) {
-        System.out.println("Error: " + d);
         double calculatedPower = -distanceOutput.getPower();
         if (Math.abs(calculatedPower) > Math.abs(power)) {
             calculatedPower = power;
         }
-        try {
-            SmartDashboard.putNumber("Calculated Power", calculatedPower);
-        } catch (Exception e) {}
-        try {
-            SmartDashboard.putNumber("Error", distanceController.getError());
-        } catch (Exception e) {}
         CommandBase.drivetrain.tankDrive(calculatedPower - d, calculatedPower);
     }
 
@@ -68,20 +56,15 @@ public class DriveStraightCommand extends PIDCommand {
         distanceController.setSetpoint(distance);
         distanceController.setAbsoluteTolerance(100);
         distanceController.enable();
-        SmartDashboard.putNumber("Set Point", distance);
     }
 
     protected void execute() {
     }
 
     protected boolean isFinished() {
-        try {
-            SmartDashboard.putNumber("Distance", CommandBase.drivetrain.rightEncoder.getDistance());
-//            System.out.println("Left Distance: " + CommandBase.drivetrain.leftEncoder.getDistance());
-//            System.out.println("Right Distance: " + CommandBase.drivetrain.rightEncoder.getDistance());
-        } catch (Exception e) {}
         return distanceController.onTarget();
     }  
+    
     protected void end() {
         System.out.println("We there");
         this.getPIDController().disable();

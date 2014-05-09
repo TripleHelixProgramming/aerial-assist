@@ -11,15 +11,15 @@ import edu.wpi.first.wpilibj.templates.commands.CommandBase;
  * @author robotics
  */
 public class SetShooterPosition extends CommandBase {
+    
     public boolean shooterPosition;
+    
     public SetShooterPosition(boolean shooterPosition) {
         requires(shooter);
         this.shooterPosition = shooterPosition;
     }
 
-    protected void initialize() {
-//        System.out.println("Setting Shooter Position ");
-    }
+    protected void initialize() { }
     
     protected void execute() {
         shooter.primeShooter(shooterPosition);
@@ -29,10 +29,7 @@ public class SetShooterPosition extends CommandBase {
         return true;
     }
 
-    protected void end() {
-//        System.out.println("Shooter Position Set");
-    }
+    protected void end() { }
 
-    protected void interrupted() {
-    }
+    protected void interrupted() { }
 }

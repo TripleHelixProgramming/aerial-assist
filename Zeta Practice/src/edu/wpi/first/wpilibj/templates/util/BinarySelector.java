@@ -21,11 +21,10 @@ public class BinarySelector {
         
     }
     
-    public int getSelectedNumber(){
+    public int getSelectedNumber() {
         return (autoSelector1.get() ? 1 : 0) +        
                 2 * (autoSelector2.get() ? 1 : 0) +
                 4 * (autoSelector3.get() ? 1 : 0);
-        
     }
     
 }

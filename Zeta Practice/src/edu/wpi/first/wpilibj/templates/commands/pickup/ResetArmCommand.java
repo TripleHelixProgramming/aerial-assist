@@ -16,19 +16,15 @@ public class ResetArmCommand extends CommandBase {
         requires(pickUp);
     }
     
-    protected void initialize() {
-    }
+    protected void initialize() { }
 
-    protected void execute() {
-    }
+    protected void execute() { }
 
     protected boolean isFinished() {
         return true;
     }
 
-    protected void end() {
-    }
+    protected void end() { }
 
-    protected void interrupted() {
-    }
+    protected void interrupted() { }
 }

@@ -13,8 +13,10 @@ import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
  * @author robotics
  */
 public class BlockerDrive extends SelectableCommand {
+    
     private CheesyVisionServer server = CheesyVisionServer.getInstance();
     private double power;
+    
     public BlockerDrive(double power) {
         requires(CommandBase.drivetrain);
         this.power = power;
@@ -47,11 +49,13 @@ public class BlockerDrive extends SelectableCommand {
 
     // Called once after isFinished returns true
     protected void end() {
+        CommandBase.drivetrain.tankDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        CommandBase.drivetrain.tankDrive(0, 0);
     }
 
     public String getCommandName() {

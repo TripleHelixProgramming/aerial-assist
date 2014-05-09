@@ -51,22 +51,23 @@ public class Drivetrain extends Subsystem {
         rightEncoder.setPIDSourceParameter(Encoder.PIDSourceParameter.kDistance);
         rightEncoder.setSamplesToAverage(10);
         rightEncoder.start();
-        
     }
      
 
     public void initDefaultCommand() {
         setDefaultCommand(new JoystickDrive());
     }
-    public void arcadeDrive(double throttle, double turn){
+    public void arcadeDrive(double throttle, double turn) {
         throttleAverager.addValue(throttle);
         turningAverager.addValue(turn);
         robotDrive.arcadeDrive(throttleAverager.getAverage(), turningAverager.getAverage());
     }
-    public void tankDrive(double leftPower, double rightPower){
+    
+    public void tankDrive(double leftPower, double rightPower) {
         robotDrive.tankDrive(leftPower, rightPower);
     }
-    public void shift(boolean shiftUp){
+    
+    public void shift(boolean shiftUp) {
         shiftSolenoid1.set(!shiftUp);
         shiftSolenoid2.set(shiftUp);
     }

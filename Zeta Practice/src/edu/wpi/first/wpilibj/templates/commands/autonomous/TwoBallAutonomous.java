@@ -20,10 +20,9 @@ import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
  * @author robotics
  */
 public class TwoBallAutonomous extends SelectableCommand {
+    
     public TwoBallAutonomous() {
-                //1000 ticks is approximately 28 inches
-
-//        addParallel(new TurnLightsOnCommand());
+       //1000 ticks is approximately 28 inches
        addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
        addSequential(new DriveStraightCommand(0.95, 3800));
        addSequential(new ShootSeries());

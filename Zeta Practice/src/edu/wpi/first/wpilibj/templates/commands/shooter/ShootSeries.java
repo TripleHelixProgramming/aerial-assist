@@ -21,5 +21,6 @@ public class ShootSeries extends CommandGroup {
         addSequential(new WaitCommand(0.2));
         addSequential(new SetShooterPosition(Shooter.PRIME));
         addSequential(new WaitCommand(0.1));
-        addParallel(new ResetArmCommand());    }
+        addParallel(new ResetArmCommand());    
+    }
 }

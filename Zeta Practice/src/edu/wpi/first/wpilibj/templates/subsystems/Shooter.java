@@ -29,7 +29,7 @@ public class Shooter extends Subsystem {
         setDefaultCommand(new SetShooterPosition(Shooter.PRIME));
     }
     
-    public void primeShooter(boolean prime){
+    public void primeShooter(boolean prime) {
         //System.out.println("IN PRIME SHOOTER " + prime);
         shooterSolenoid.set(prime);
         shooterSolenoid2.set(prime);

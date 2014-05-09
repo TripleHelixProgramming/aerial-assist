@@ -16,8 +16,7 @@ public class JoystickDrive extends CommandBase {
         requires(drivetrain);
     }
 
-    protected void initialize() {
-    }
+    protected void initialize() { }
 
     protected void execute() {
         drivetrain.arcadeDrive(oi.getThrottle(), oi.getTurn());
@@ -27,9 +26,7 @@ public class JoystickDrive extends CommandBase {
         return false;
     }
 
-    protected void end() {
-    }
+    protected void end() { }
 
-    protected void interrupted() {
-    }
+    protected void interrupted() { }
 }

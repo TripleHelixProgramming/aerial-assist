@@ -6,18 +6,20 @@ package edu.wpi.first.wpilibj.templates.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.templates.RobotMap;
 import edu.wpi.first.wpilibj.templates.commands.lights.UnderPressureCommand;
+import edu.wpi.first.wpilibj.templates.util.PropertyReader;
 
 /**
  *
  * @author robotics
  */
 public class Lights extends Subsystem {
-    private Relay lightController = new Relay(RobotMap.lightChannel);
+    
+    private Relay lightController = new Relay(PropertyReader.getProperty("LIGHT_RELAY_CHANNEL", 2));
     private AnalogChannel pressure = new AnalogChannel(RobotMap.pressureChannel);
+    
     public void initDefaultCommand() {
         UnderPressureCommand underPressureCommand = new UnderPressureCommand();
         underPressureCommand.setRunWhenDisabled(true);
@@ -33,8 +35,6 @@ public class Lights extends Subsystem {
     }
     
     public int getPressure() {
-//        System.out.println("Value: " + pressure.getValue());
-//        System.out.println("Voltage: " + pressure.getVoltage());
         return (int) (pressure.getVoltage() * 15);
     }
 }

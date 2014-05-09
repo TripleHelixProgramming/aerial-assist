@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
 public class DriveStraightGroup extends CommandGroup {
     
     public DriveStraightGroup(double power, int distance) {
-        
         addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
         addSequential(new DriveStraightCommand(power, distance));
     }

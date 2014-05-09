@@ -11,13 +11,14 @@ import edu.wpi.first.wpilibj.templates.commands.CommandBase;
  * @author robotics
  */
 public class ShiftCommand extends CommandBase {
+    
     private boolean shiftUp;
+    
     public ShiftCommand(boolean shiftUp) {
         this.shiftUp = shiftUp;
     }
 
-    protected void initialize() {
-    }
+    protected void initialize() { }
 
     protected void execute() {
         drivetrain.shift(shiftUp);
@@ -27,9 +28,7 @@ public class ShiftCommand extends CommandBase {
         return true;
     }
 
-    protected void end() {
-    }
+    protected void end() { }
 
-    protected void interrupted() {
-    }
+    protected void interrupted() { }
 }

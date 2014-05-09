@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.networktables2.util.List;
  * @author robotics
  */
 public class RollingAverager {
+    
     private List values = new List();
     private int numValues;
     
@@ -44,7 +45,6 @@ public class RollingAverager {
         for(int i = 0; i < values.size(); i++) {
             sum += ((Double) values.get(i)).doubleValue();
         }
-        
         return sum / values.size();
     }
 }

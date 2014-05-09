@@ -17,8 +17,7 @@ public class UnderPressureCommand extends CommandBase {
         requires(lights);
     }
 
-    protected void initialize() {
-    }
+    protected void initialize() { }
 
     protected void execute() {
         if (lights.getPressure() < 85) {
@@ -35,9 +34,7 @@ public class UnderPressureCommand extends CommandBase {
         return false;
     }
 
-    protected void end() {
-    }
+    protected void end() { }
 
-    protected void interrupted() {
-    }
+    protected void interrupted() { }
 }

@@ -5,13 +5,14 @@
 package edu.wpi.first.wpilibj.templates.commands.drivetrain;
 
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
-import edu.wpi.first.wpilibj.templates.util.HotGoalFinder;
+import edu.wpi.first.wpilibj.templates.util.HotGoalLocation;
 import edu.wpi.first.wpilibj.templates.util.ProvidesDirection;
 /**
  *
  * @author robotics
  */
 public class TurnCommand extends CommandBase {
+    
     private double powerLevel;
     private double distance;
     private ProvidesDirection direction;
@@ -33,25 +34,19 @@ public class TurnCommand extends CommandBase {
     }
 
     protected void execute() {
-        if(direction.getDirection().equals(HotGoalFinder.RIGHT)){
-            System.out.println("Turn Right");
+        if(direction.getDirection().equals(HotGoalLocation.RIGHT)){
             drivetrain.tankDrive(0, powerLevel);
-        }else {
-            System.out.println("Turn Left");
+        } else {
             drivetrain.tankDrive(powerLevel, 0);
         }
     }
 
     protected boolean isFinished() {
-        if(direction.getDirection().equals(HotGoalFinder.RIGHT) && Math.abs(drivetrain.rightEncoder.getDistance()) >= Math.abs(distance) - 5){
+        if(direction.getDirection().equals(HotGoalLocation.RIGHT) && Math.abs(drivetrain.rightEncoder.getDistance()) >= Math.abs(distance) - 5) {
             System.out.println("Finished turning");
-            System.out.println("Left Encoder: " + CommandBase.drivetrain.leftEncoder.getDistance());
-            System.out.println("Right Encoder: " + CommandBase.drivetrain.rightEncoder.getDistance());
             return true;
-        } else if (direction.getDirection().equals(HotGoalFinder.LEFT) && Math.abs(drivetrain.leftEncoder.getDistance()) >= Math.abs(distance)  - 5){
+        } else if (direction.getDirection().equals(HotGoalLocation.LEFT) && Math.abs(drivetrain.leftEncoder.getDistance()) >= Math.abs(distance)  - 5) {
             System.out.println("Finished turning");
-            System.out.println("Left Encoder: " + CommandBase.drivetrain.leftEncoder.getDistance());
-            System.out.println("Right Encoder: " + CommandBase.drivetrain.rightEncoder.getDistance());
             return true;
         } else {
             return false;
@@ -62,6 +57,5 @@ public class TurnCommand extends CommandBase {
         drivetrain.tankDrive(0, 0);
     }
 
-    protected void interrupted() {
-    }
+    protected void interrupted() { }
 }

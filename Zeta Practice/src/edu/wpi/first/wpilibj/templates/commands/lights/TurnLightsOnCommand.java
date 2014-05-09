@@ -16,8 +16,7 @@ public class TurnLightsOnCommand extends CommandBase {
         requires(lights);
     }
 
-    protected void initialize() {
-    }
+    protected void initialize() { }
 
     protected void execute() {
         lights.turnOn(true);
@@ -27,9 +26,7 @@ public class TurnLightsOnCommand extends CommandBase {
         return false;
     }
 
-    protected void end() {
-    }
+    protected void end() { }
 
-    protected void interrupted() {
-    }
+    protected void interrupted() { }
 }
