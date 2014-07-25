@@ -18,7 +18,7 @@ public class NegInertiaCalc {
         this.negInertiaScalar = negInertiaScalar;
     }
     
-    public double calculator(double turn) {
+    public double calculate(double turn) {
         double newTurn = turn;
         double negInertia = newTurn - oldTurn;
         oldTurn = newTurn;

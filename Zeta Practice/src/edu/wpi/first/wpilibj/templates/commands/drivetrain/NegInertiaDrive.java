@@ -22,7 +22,7 @@ public class NegInertiaDrive extends CommandBase {
     protected void initialize() { }
 
     protected void execute() {       
-        drivetrain.arcadeDrive(oi.getThrottle(), nic.calculator(oi.getTurn()));
+        drivetrain.arcadeDrive(oi.getThrottle(), nic.calculate(oi.getTurn()));
     }
 
     protected boolean isFinished() {
