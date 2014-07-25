@@ -76,3 +76,13 @@ public class Robot extends IterativeRobot {
         table.putString("Selected Autonomous", CommandBase.oi.getSelectedAutoCommand().getCommandName());
     }
 }
+
+
+
+
+
+
+
+
+
+

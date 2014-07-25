@@ -19,7 +19,7 @@ public class LowGoalShootSeries extends CommandGroup {
     public LowGoalShootSeries() {
         addParallel(new PickUpDeploy(PickUp.DEPLOY, 0, PickUp.CLOSE));
         addSequential(new WaitCommand(0.8));
-        addSequential(new LowGoalShot(6, 1, 3));
+        addSequential(new LowGoalShot(7, 1, 1));
         addParallel(new ResetArmCommand());
     }
 }

@@ -17,8 +17,8 @@ import edu.wpi.first.wpilibj.templates.util.PropertyReader;
  */
 public class Lights extends Subsystem {
     
-    private Relay lightController = new Relay(PropertyReader.getProperty("LIGHT_RELAY_CHANNEL", 2));
-    private AnalogChannel pressure = new AnalogChannel(RobotMap.pressureChannel);
+    private Relay lightController = new Relay(PropertyReader.getProperty("LIGHT_RELAY_CHANNEL", RobotMap.lightChannel));
+    private AnalogChannel pressure = new AnalogChannel(PropertyReader.getProperty("PRESSURE_TRANSDUCER_CHANNEL" ,RobotMap.pressureChannel));
     
     public void initDefaultCommand() {
         UnderPressureCommand underPressureCommand = new UnderPressureCommand();

@@ -20,8 +20,8 @@ public class HotGoalCheesy extends SelectableCommand {
     public HotGoalCheesy() {
         WaitForAnyGoal waitFor = new WaitForAnyGoal();
         
-        addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
-        addSequential(new DriveStraightCommand(0.95, 3800));//3800
+        addSequential(new ShiftCommand(Drivetrain.HIGH_GEAR));
+        addSequential(new DriveStraightCommand(0.85, 3800));//3800
         addSequential(waitFor, 5);
         addSequential(new ShootSeries());
     }

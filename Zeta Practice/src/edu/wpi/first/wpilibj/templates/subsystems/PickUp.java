@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.templates.RobotMap;
 import edu.wpi.first.wpilibj.templates.commands.pickup.PickUpDeploy;
+import edu.wpi.first.wpilibj.templates.util.PropertyReader;
 import edu.wpi.first.wpilibj.templates.util.RollingAverager;
 
 /**
@@ -23,12 +24,12 @@ public class PickUp extends Subsystem {
     public static final boolean OPEN = true;
     public static final boolean CLOSE = false;
     
-    private Solenoid shooterSolenoid1 = new Solenoid(1, RobotMap.pickUpSolenoid1);
-    private Solenoid shooterSolenoid2 = new Solenoid(1, RobotMap.pickUpSolenoid2);
+    private Solenoid pickUpSolenoid1 = new Solenoid(PropertyReader.getProperty("PICKUP_SOLENOID_MODULE", 2), PropertyReader.getProperty("PICKUP_SOLENOID_CHANNEL_A", RobotMap.pickUpSolenoid1));
+    private Solenoid pickUpSolenoid2 = new Solenoid(PropertyReader.getProperty("PICKUP_SOLENOID_MODULE", 2), PropertyReader.getProperty("PICKUP_SOLENOID_CHANNEL_B", RobotMap.pickUpSolenoid2));
     
-    private Solenoid wingSolenoid = new Solenoid(1, RobotMap.wingSolenoidChannel);
+    private Solenoid wingSolenoid = new Solenoid(PropertyReader.getProperty("WING_SOLENOID_MODULE", 2), PropertyReader.getProperty("WING_SOLENOID_CHANNEL", RobotMap.wingSolenoidChannel));
     
-    private SpeedController upperPickUp = new Talon(RobotMap.upperPickUpRoller);
+    private SpeedController upperPickUp = new Talon(PropertyReader.getProperty("PICKUP_TALON_CHANNEL", RobotMap.upperPickUpRoller));
     
     private double powerLevel;
     
@@ -45,8 +46,8 @@ public class PickUp extends Subsystem {
     }
     
     public void deployArm(boolean deploy) {
-       shooterSolenoid1.set(!deploy);
-       shooterSolenoid2.set(deploy);
+       pickUpSolenoid1.set(!deploy);
+       pickUpSolenoid2.set(deploy);
     }
     public void deployCatch(boolean deploy) {
         wingSolenoid.set(deploy);

@@ -2,6 +2,7 @@
 package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.camera.AxisCamera;
 import edu.wpi.first.wpilibj.networktables2.util.List;
@@ -10,6 +11,7 @@ import edu.wpi.first.wpilibj.templates.commands.autonomous.HotGoalCheesy;
 import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomous;
 import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomousHotGoal;
 import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomousWithPickUp;
+import edu.wpi.first.wpilibj.templates.commands.drivetrain.JoystickDrive;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.ShiftCommand;
 import edu.wpi.first.wpilibj.templates.commands.pickup.PassCommand;
 import edu.wpi.first.wpilibj.templates.commands.pickup.PickUpDeploy;
@@ -95,7 +97,7 @@ public class OI {
         shiftDownButton = new JoystickButton(gamepad, RobotMap.shiftDownButton);
         shiftDownButton.whenPressed(new ShiftCommand(Drivetrain.LOW_GEAR));
         
-        kissPassButton = new JoystickButton (gamepad, RobotMap.kissPassButton);
+        kissPassButton = new JoystickButton(gamepad, RobotMap.kissPassButton);
         kissPassButton.whileHeld(new PickUpDeploy(PickUp.RETRACT, RobotMap.intakeRollerSpeed));
     }
     
@@ -103,31 +105,45 @@ public class OI {
         // Xbox Controller
         if(practice){
             if(gamepad.getZ() < 0){
-                return -gamepad.getX();
+                return getWithDeadband(-gamepad.getX());
             }
-            return gamepad.getX();
+            return getWithDeadband(gamepad.getX());
         }
         // Ps4 Controller
         if(gamepad.getRawAxis(4) > 0){
-            return -gamepad.getRawAxis(2);
+            return getWithDeadband(-gamepad.getRawAxis(2));
         }
-        return gamepad.getRawAxis(2);
+        return getWithDeadband(gamepad.getRawAxis(2));
+    }
+    
+    public double getWithDeadband(double power) {
+        if (Math.abs(power) < 0.05) {
+            return 0;
+        }
+        return power;
     }
     
     public double getTurn() {
         if(practice){
             // Xbox Controller
             if(gamepad.getZ() > 0){
-               return gamepad.getRawAxis(4) * RobotMap.turnScaling;
+               return getWithDeadband(gamepad.getRawAxis(4) * -getTurnScaling());
             }
-            return gamepad.getRawAxis(4) * -RobotMap.turnScaling;
+            return getWithDeadband(gamepad.getRawAxis(4) * getTurnScaling());
         }
         
         // Ps4 Controller
         if (gamepad.getRawAxis(5) > 0){
-            return gamepad.getRawAxis(3) * RobotMap.turnScaling;
+            return getWithDeadband(gamepad.getRawAxis(3) * -getTurnScaling());
         }
-        return gamepad.getRawAxis(3) * RobotMap.turnScaling;
+        return getWithDeadband(gamepad.getRawAxis(3) * getTurnScaling());
+    }
+    
+    private double getTurnScaling() {
+        double highSpeedTurn = 0.6;
+        double lowSpeedTurn = 0.8;
+        // (Low Speed turning - High Speed Turn) + High Speed turning
+        return Math.abs(getThrottle()) * (highSpeedTurn - lowSpeedTurn) + lowSpeedTurn;
     }
     
     // Methods

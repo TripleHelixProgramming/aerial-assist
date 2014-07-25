@@ -4,9 +4,11 @@
  */
 package edu.wpi.first.wpilibj.templates.util;
 
+import com.sun.squawk.io.BufferedReader;
 import com.sun.squawk.microedition.io.FileConnection;
 import edu.wpi.first.wpilibj.networktables2.util.List;
 import java.io.DataInputStream;
+import java.io.InputStreamReader;
 import javax.microedition.io.Connector;
 
 /**
@@ -24,16 +26,19 @@ public class PropertyReader {
         
         try {
             FileConnection file = (FileConnection) Connector.open("file:///properties.txt");
-            DataInputStream reader = file.openDataInputStream();
-            String propertyName;
-            while ((propertyName = reader.readUTF()) != null) {
-                int propertyValue = reader.readInt();
-                System.out.println("Loading Property : " + propertyName + " - " + propertyValue);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(file.openDataInputStream()));
+            String read;
+            System.out.println("Loading properties:");
+            while ((read = reader.readLine()) != null) {
+                String propertyName = read.substring(0, read.indexOf(':'));
+                String value = read.substring(read.indexOf(':') + 1);
+                int propertyValue = Integer.parseInt(value);
+                System.out.println(propertyName + " - " + propertyValue);
                 propertyNames.add(propertyName);
                 propertyValues.add(new Integer(propertyValue));
              }
         } catch(Exception e) {
-            System.out.println("Property file not found");
+            e.printStackTrace();
         }
     }
     
