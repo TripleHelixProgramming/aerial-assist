@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.util.GenericPIDOutput;
+import edu.wpi.first.wpilibj.templates.util.SlowdownPrintings;
 
 
 /**
@@ -23,7 +24,7 @@ public class DriveStraightCommand extends PIDCommand {
     private final GenericPIDOutput distanceOutput;
     
     public DriveStraightCommand(double power, int inches) {
-        super(.0016, 0.00009, 0); //This is for turning
+        super(.000016, 0, 0); //This is for turning
         this.power = power;
         this.distance = -inches;
         requires(CommandBase.drivetrain);
@@ -32,9 +33,11 @@ public class DriveStraightCommand extends PIDCommand {
         distanceController = new PIDController(0.001, 0.0003, 0.008414159265358979323846838, CommandBase.drivetrain.rightEncoder, distanceOutput); //This is for distance
     }
     
+    private SlowdownPrintings printer = new SlowdownPrintings(1000);
     protected double returnPIDInput() {
         double left = CommandBase.drivetrain.leftEncoder.getDistance();
         double right = CommandBase.drivetrain.rightEncoder.getDistance();
+        printer.print("" + distanceController.getError());
         return left - right;
     }
 

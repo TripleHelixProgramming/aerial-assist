@@ -12,8 +12,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
+import edu.wpi.first.wpilibj.templates.commands.autonomous.HotGoalCheesy;
+import edu.wpi.first.wpilibj.templates.commands.autonomous.OneBallNoHot;
+import edu.wpi.first.wpilibj.templates.commands.drivetrain.DriveStraightCommand;
+import edu.wpi.first.wpilibj.templates.commands.drivetrain.SimpleTurn;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj.templates.subsystems.Shifters;
 import edu.wpi.first.wpilibj.templates.util.CheesyVisionServer;
 import edu.wpi.first.wpilibj.templates.util.PropertyReader;
 
@@ -36,7 +42,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void autonomousInit() {
-        autonomousCommand = CommandBase.oi.getSelectedAutoCommand();
+        autonomousCommand = new OneBallNoHot(); //CommandBase.oi.getSelectedAutoCommand();
         autonomousCommand.start();
     }
 
@@ -51,7 +57,7 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) {
             autonomousCommand.cancel();
         }
-        CommandBase.drivetrain.shift(Drivetrain.HIGH_GEAR);
+        CommandBase.shifters.shift(Shifters.HIGH_GEAR);
     }
 
     /**
@@ -59,6 +65,12 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+//        System.out.println(CommandBase.oi.gamepad.getRawAxis(1));
+//        System.out.println(CommandBase.oi.gamepad.getRawAxis(2));
+//        System.out.println(CommandBase.oi.gamepad.getRawAxis(3));
+//        System.out.println(CommandBase.oi.gamepad.getRawAxis(4));
+//        System.out.println(CommandBase.oi.gamepad.getRawAxis(5));
+//        System.out.println(CommandBase.oi.gamepad.getRawAxis(6));
     }
     
     /**

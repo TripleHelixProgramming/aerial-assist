@@ -15,17 +15,18 @@ public class ShiftCommand extends CommandBase {
     private boolean shiftUp;
     
     public ShiftCommand(boolean shiftUp) {
+        requires(shifters);
         this.shiftUp = shiftUp;
     }
 
     protected void initialize() { }
 
     protected void execute() {
-        drivetrain.shift(shiftUp);
+        shifters.shift(shiftUp);
     }
 
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     protected void end() { }

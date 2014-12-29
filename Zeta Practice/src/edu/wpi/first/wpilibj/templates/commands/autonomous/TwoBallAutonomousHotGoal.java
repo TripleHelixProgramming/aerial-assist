@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.templates.commands.pickup.PickUpDeploy;
 import edu.wpi.first.wpilibj.templates.commands.shooter.ShootSeries;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.templates.subsystems.PickUp;
+import edu.wpi.first.wpilibj.templates.subsystems.Shifters;
 import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
 
 /**
@@ -25,7 +26,7 @@ public class TwoBallAutonomousHotGoal extends SelectableCommand {
         WaitForAnyGoal firstTurn = new WaitForAnyGoal();
         WaitForAnyGoal secondTurn = new WaitForAnyGoal();
         
-        addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
+        addSequential(new ShiftCommand(Shifters.LOW_GEAR));
         addSequential(new DriveStraightCommand(0.95, 3800));//3800
         addSequential(new WaitCommand(0.75));
         addSequential(firstTurn, 0.5);

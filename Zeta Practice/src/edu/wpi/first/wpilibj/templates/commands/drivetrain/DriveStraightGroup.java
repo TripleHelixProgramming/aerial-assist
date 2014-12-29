@@ -6,6 +6,7 @@ package edu.wpi.first.wpilibj.templates.commands.drivetrain;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj.templates.subsystems.Shifters;
 
 /**
  *
@@ -14,7 +15,7 @@ import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
 public class DriveStraightGroup extends CommandGroup {
     
     public DriveStraightGroup(double power, int distance) {
-        addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
+        addSequential(new ShiftCommand(Shifters.LOW_GEAR));
         addSequential(new DriveStraightCommand(power, distance));
     }
 }

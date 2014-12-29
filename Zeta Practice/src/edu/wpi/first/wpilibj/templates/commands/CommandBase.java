@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.templates.OI;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.templates.subsystems.Lights;
 import edu.wpi.first.wpilibj.templates.subsystems.PickUp;
+import edu.wpi.first.wpilibj.templates.subsystems.Shifters;
 import edu.wpi.first.wpilibj.templates.subsystems.Shooter;
 
 /**
@@ -23,6 +24,7 @@ public abstract class CommandBase extends Command {
     public static PickUp pickUp = new PickUp();
     public static Shooter shooter = new Shooter();
     public static Lights lights = new Lights();
+    public static Shifters shifters = new Shifters();
 
     public static void init() {
         Compressor compressor = new Compressor(1, 1);

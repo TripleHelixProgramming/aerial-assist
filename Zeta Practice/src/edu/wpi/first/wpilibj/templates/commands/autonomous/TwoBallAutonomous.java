@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.templates.commands.pickup.PickUpDeploy;
 import edu.wpi.first.wpilibj.templates.commands.shooter.ShootSeries;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.templates.subsystems.PickUp;
+import edu.wpi.first.wpilibj.templates.subsystems.Shifters;
 import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
 
 /**
@@ -23,7 +24,7 @@ public class TwoBallAutonomous extends SelectableCommand {
     
     public TwoBallAutonomous() {
        //1000 ticks is approximately 28 inches
-       addSequential(new ShiftCommand(Drivetrain.LOW_GEAR));
+       addSequential(new ShiftCommand(Shifters.LOW_GEAR));
        addSequential(new DriveStraightCommand(0.95, 3800));
        addSequential(new ShootSeries());
        addParallel(new PickUpDeploy(PickUp.DEPLOY, RobotMap.intakeRollerSpeed, PickUp.CLOSE));

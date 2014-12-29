@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.templates.util.NegInertiaCalc;
  */
 public class NegInertiaDrive extends CommandBase {
     
-    private NegInertiaCalc nic = new NegInertiaCalc(5);
+    private NegInertiaCalc nic = new NegInertiaCalc(0);
     
     public NegInertiaDrive() {
         requires(drivetrain);

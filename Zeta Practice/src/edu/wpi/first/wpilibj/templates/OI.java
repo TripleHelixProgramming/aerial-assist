@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.templates.commands.autonomous.HotGoalCheesy;
 import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomous;
 import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomousHotGoal;
 import edu.wpi.first.wpilibj.templates.commands.autonomous.TwoBallAutonomousWithPickUp;
+import edu.wpi.first.wpilibj.templates.commands.drivetrain.AutoShifting;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.JoystickDrive;
 import edu.wpi.first.wpilibj.templates.commands.drivetrain.ShiftCommand;
 import edu.wpi.first.wpilibj.templates.commands.pickup.PassCommand;
@@ -20,6 +21,7 @@ import edu.wpi.first.wpilibj.templates.commands.shooter.LowGoalShootSeries;
 import edu.wpi.first.wpilibj.templates.commands.shooter.ShootSeries;
 import edu.wpi.first.wpilibj.templates.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.templates.subsystems.PickUp;
+import edu.wpi.first.wpilibj.templates.subsystems.Shifters;
 import edu.wpi.first.wpilibj.templates.util.AutonomousSelector;
 import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
 
@@ -30,7 +32,7 @@ import edu.wpi.first.wpilibj.templates.util.SelectableCommand;
 public class OI {
     //Joysticks
     private boolean practice = false;
-    private Joystick gamepad = new Joystick(1);
+    public Joystick gamepad = new Joystick(1);
     private Joystick operatorControl = new Joystick(2);
     
     //Joystick Buttons: Operator Control
@@ -92,10 +94,10 @@ public class OI {
         
         //Joystick Buttons: Gamepad
         shiftUpButton = new JoystickButton(gamepad, RobotMap.shiftUpButton);
-        shiftUpButton.whenPressed(new ShiftCommand(Drivetrain.HIGH_GEAR));
+        shiftUpButton.whenPressed(new AutoShifting());
         
         shiftDownButton = new JoystickButton(gamepad, RobotMap.shiftDownButton);
-        shiftDownButton.whenPressed(new ShiftCommand(Drivetrain.LOW_GEAR));
+        shiftDownButton.whenPressed(new ShiftCommand(Shifters.LOW_GEAR));
         
         kissPassButton = new JoystickButton(gamepad, RobotMap.kissPassButton);
         kissPassButton.whileHeld(new PickUpDeploy(PickUp.RETRACT, RobotMap.intakeRollerSpeed));
@@ -139,9 +141,13 @@ public class OI {
         return getWithDeadband(gamepad.getRawAxis(3) * getTurnScaling());
     }
     
+    public double getTurnWithoutScaling() {
+        return getWithDeadband(gamepad.getRawAxis(3));
+    }
+    
     private double getTurnScaling() {
-        double highSpeedTurn = 0.6;
-        double lowSpeedTurn = 0.8;
+        double highSpeedTurn = 0.7;
+        double lowSpeedTurn = 1;
         // (Low Speed turning - High Speed Turn) + High Speed turning
         return Math.abs(getThrottle()) * (highSpeedTurn - lowSpeedTurn) + lowSpeedTurn;
     }
